@@ -24,13 +24,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.koushikdutta.async.parser.JSONArrayParser;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -41,7 +42,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -59,6 +59,8 @@ public class MainActivity extends Activity {
     TextView lst_tv;
     String title;
     int itemindex;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle mDrawerToggle;
     
 	// Create a JSON object from the request response
 	JSONObject jsonObject = null;
@@ -72,12 +74,49 @@ public class MainActivity extends Activity {
 		lst_tv = (TextView) findViewById(R.id.rowTextView);
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
-		
+		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
 		addListenerOnButton();
 		getdata gd = new getdata();
 		gd.execute();
+		
+		
+		
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawer,
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(getTitle());
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle("News");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        drawer.setDrawerListener(mDrawerToggle);
+    }
+
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.drawer:
+	            if(drawer.isDrawerOpen(drawerlst) == false)
+	        	drawer.openDrawer(drawerlst);
+	            else 
+	            	drawer.closeDrawer(drawerlst);
+	            return true;
+
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
+
 	class getdata extends AsyncTask<String, Void, String>
 	{
 
@@ -297,11 +336,14 @@ public class MainActivity extends Activity {
 		
 	}
 
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+//	    inflater.inflate(R.menu.game_menu, menu);
+
 		return true;
 	}
 	
@@ -328,7 +370,7 @@ public class MainActivity extends Activity {
 					getdetails gdet = new getdetails();
 
 					gdet.execute();
-					
+					drawer.closeDrawer(drawerlst);
 			    }});
 		
 		

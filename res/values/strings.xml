@@ -4,5 +4,9 @@
     <string name="app_name">ClientServerV1</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+        <string name="drawer_open">Hello world!</string>
+    
+            <string name="drawer_close">Hello world!</string>
+        
 
 </resources>
