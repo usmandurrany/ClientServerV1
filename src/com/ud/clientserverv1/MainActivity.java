@@ -24,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.koushikdutta.async.parser.JSONArrayParser;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,11 +34,14 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -51,18 +56,20 @@ public class MainActivity extends Activity {
 	ListView drawerlst;
     InputStream content;
     String line;
-
-    
+    TextView lst_tv;
+    String title;
+    int itemindex;
     
 	// Create a JSON object from the request response
 	JSONObject jsonObject = null;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		btn = (Button) findViewById(R.id.button1);
-		txt = (EditText) findViewById(R.id.editText1);	
+		txt = (EditText) findViewById(R.id.editText1);
+		lst_tv = (TextView) findViewById(R.id.rowTextView);
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		
@@ -156,10 +163,121 @@ public class MainActivity extends Activity {
 			      {
 			        listContents.add(jsonArray.getJSONObject(i).getString("title"));
 			        Log.d("JSON ",jsonArray.getString(i));
+		    	    strRes.setText(jsonArray.getJSONObject(i).getString("description"));
+
 			      }
 
 			      drawerlst.setAdapter(new ArrayAdapter<String>(MainActivity.this, R.layout.custom_list_view, listContents));
-			      
+	              this.cancel(true);
+			//	jsonObject = new JSONObject(result);
+		//	} catch (JSONException e) {
+				// TODO Auto-generated catch block
+		//		e.printStackTrace();
+			}
+
+			//try {
+				//strRes.setText(jsonObject.getString("FirstName"));
+				
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		
+		
+	}
+	class getdetails extends AsyncTask<String, Void, String>
+	{
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", txt.getText().toString()));
+			//Create the HTTP request
+			HttpParams httpParameters = new BasicHttpParams();
+
+			//Setup timeouts
+			HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
+			HttpConnectionParams.setSoTimeout(httpParameters, 15000);			
+
+			HttpClient httpclient = new DefaultHttpClient(httpParameters);
+			HttpPost httppost = new HttpPost("http://192.168.10.3/oauth/test.json");
+
+				try {
+					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				try {
+					response = httpclient.execute(httppost);
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+			HttpEntity entity = response.getEntity();
+
+			try {
+				content = entity.getContent();
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+	        try {
+				while ((line = reader.readLine()) != null) {
+				  result.append(line);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//	try {
+				//	result = EntityUtils.toString(entity);
+				//} catch (ParseException e) {
+					// TODO Auto-generated catch block
+			//		e.printStackTrace();
+			//	} catch (IOException e) {
+					// TODO Auto-generated catch block
+				//	e.printStackTrace();
+			//	}
+
+				return result.toString();
+
+			
+
+
+
+		}
+		
+		protected void onPostExecute(String result)
+		{
+			try {
+				JSONObject json=new JSONObject(result);
+				JSONArray jsonArray = json.getJSONArray("rss");
+			      //JSONArray jsonArray = new JSONArray(result);
+			      int length = jsonArray.length();
+			     // for (int i = 0; i < length; i++)
+			      //{	
+			    	 // Toast.makeText(getBaseContext(), jsonArray.getString(itemindex), Toast.LENGTH_LONG).show(); 
+
+			    	  //if(jsonArray.getString(0) == title)
+			    	  //{
+			    	   strRes.setText(jsonArray.getJSONObject(itemindex).getString("description"));
+			    	   // break;
+			    	  //}
+			      //}
+
+      
 			//	jsonObject = new JSONObject(result);
 		//	} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -179,6 +297,7 @@ public class MainActivity extends Activity {
 		
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -188,8 +307,9 @@ public class MainActivity extends Activity {
 	
 	private void addListenerOnButton() {
 		// TODO Auto-generated method stub
-	btn.setOnTouchListener(new OnTouchListener() {
-
+	
+		btn.setOnTouchListener(new OnTouchListener() {
+	
 
 	@Override
 	public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -199,7 +319,23 @@ public class MainActivity extends Activity {
 		return false;
 	}
 		});
+		drawerlst.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
+			    {
+			      title = (drawerlst.getItemAtPosition(position).toString());
+			      itemindex = position;
+					//Toast.makeText(getBaseContext(), , Toast.LENGTH_LONG).show();
+					getdetails gdet = new getdetails();
+
+					gdet.execute();
+					
+			    }});
+		
+		
 	}
 	
+
+
+
 
 }
