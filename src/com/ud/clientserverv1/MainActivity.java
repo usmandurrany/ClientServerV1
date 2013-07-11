@@ -32,14 +32,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,8 +44,8 @@ public class MainActivity extends Activity {
 
 
 	
-	EditText txt;
-	Button btn;
+	//EditText txt;
+	//Button btn;
 	HttpResponse response;
 	StringBuilder result = new StringBuilder();
 	TextView strRes;
@@ -69,8 +65,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		btn = (Button) findViewById(R.id.button1);
-		txt = (EditText) findViewById(R.id.editText1);
+		//btn = (Button) findViewById(R.id.button1);
+		//txt = (EditText) findViewById(R.id.editText1);
 		lst_tv = (TextView) findViewById(R.id.rowTextView);
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
@@ -86,7 +82,7 @@ public class MainActivity extends Activity {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle(getTitle());
+                getActionBar().setTitle(title);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
@@ -123,7 +119,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", txt.getText().toString()));
+			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", ""));
 			//Create the HTTP request
 			HttpParams httpParameters = new BasicHttpParams();
 
@@ -132,7 +128,7 @@ public class MainActivity extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParameters, 15000);			
 
 			HttpClient httpclient = new DefaultHttpClient(httpParameters);
-			HttpPost httppost = new HttpPost("http://192.168.10.3/oauth/test.json");
+			HttpPost httppost = new HttpPost("http://192.168.10.3/oauth/test.php");
 	
 				try {
 					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -194,8 +190,7 @@ public class MainActivity extends Activity {
 			try {
 				JSONObject json=new JSONObject(result);
 				JSONArray jsonArray = json.getJSONArray("rss");
-			      //JSONArray jsonArray = new JSONArray(result);
-			         JSONObject json_obj = jsonArray.getJSONObject(1);   //get the 3rd item
+			      jsonArray.getJSONObject(1);
 			      int length = jsonArray.length();
 			      List<String> listContents = new ArrayList<String>(length);
 			      for (int i = 0; i < length; i++)
@@ -232,7 +227,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected String doInBackground(String... arg0) {
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", txt.getText().toString()));
+			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", ""));
 			//Create the HTTP request
 			HttpParams httpParameters = new BasicHttpParams();
 
@@ -303,11 +298,7 @@ public class MainActivity extends Activity {
 			try {
 				JSONObject json=new JSONObject(result);
 				JSONArray jsonArray = json.getJSONArray("rss");
-			      //JSONArray jsonArray = new JSONArray(result);
-			      int length = jsonArray.length();
-			     // for (int i = 0; i < length; i++)
-			      //{	
-			    	 // Toast.makeText(getBaseContext(), jsonArray.getString(itemindex), Toast.LENGTH_LONG).show(); 
+			      jsonArray.length();
 
 			    	  //if(jsonArray.getString(0) == title)
 			    	  //{
@@ -350,7 +341,7 @@ public class MainActivity extends Activity {
 	private void addListenerOnButton() {
 		// TODO Auto-generated method stub
 	
-		btn.setOnTouchListener(new OnTouchListener() {
+/*btn.setOnTouchListener(new OnTouchListener() {
 	
 
 	@Override
@@ -360,7 +351,7 @@ public class MainActivity extends Activity {
 			gd.execute();
 		return false;
 	}
-		});
+		});*/
 		drawerlst.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 			    {
