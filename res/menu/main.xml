@@ -7,5 +7,15 @@
              android:visible="true">
         
     </item>
+    
+        <item android:id="@+id/liveView"
+         android:icon="@drawable/ic_live"
+          android:showAsAction="always"
+           android:enabled="true"
+            android:checkable="true"
+             android:visible="true" >
+                    
+    </item>
+    
 
 </menu>

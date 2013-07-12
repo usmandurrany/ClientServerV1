@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -37,8 +39,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 
 public class MainActivity extends Activity {
@@ -55,9 +58,15 @@ public class MainActivity extends Activity {
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
     ProgressDialog pDialog;
-    
+    VideoView mVideoView;
+    Uri uri;
+    MediaController mediaController;
+	//Document doc;
+
+	
 	// Create a JSON object from the request response
 	JSONObject jsonObject = null;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +77,12 @@ public class MainActivity extends Activity {
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
+		
+		
 		addListenerOnButton();
 		getdata gd = new getdata();
+        mediaController = new MediaController(this);
+
 		gd.execute();
 		
 		
@@ -93,6 +106,36 @@ public class MainActivity extends Activity {
         // Set the drawer toggle as the DrawerListener
         drawer.setDrawerListener(mDrawerToggle);
     }
+	
+	/*class urlparse extends AsyncTask<String,Void,String>
+	{
+		protected String doInBackground(String... arg0)
+		{
+			try {
+				doc = Jsoup.parse(new URL("http://www.google.com"), 2000);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "none";
+			
+		}
+		protected void onPostExecute(String document)
+		{
+
+            Elements resultLinks = doc.select("a");
+            Toast.makeText(MainActivity.this, "number of links: " + resultLinks.size(),Toast.LENGTH_LONG).show();
+            for (Element link : resultLinks) {
+                System.out.println();
+                String href = link.attr("href");
+           //     System.out.println("Title: " + link.text());
+	            //Toast.makeText(this, "number of links: " + resultLinks.size(),Toast.LENGTH_LONG);
+            }
+		}
+	} */
 
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -104,6 +147,17 @@ public class MainActivity extends Activity {
 	            else 
 	            	drawer.closeDrawer(drawerlst);
 	            return true;
+	        case R.id.liveView:
+	        //	setContentView(R.layout.activiry_live_view);
+	 
+	    		Intent liveView = new Intent(MainActivity.this, LiveViewActivity.class);
+	    		startActivity(liveView);
+	    		overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+	        	
+	        	//urlparse uparse = new urlparse();
+	        	//uparse.execute();
+
+	    		return true;
 
 	        default:
 	            return super.onOptionsItemSelected(item);
