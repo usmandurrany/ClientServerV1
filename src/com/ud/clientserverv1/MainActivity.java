@@ -25,11 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,15 +37,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
 
-
-	
-	//EditText txt;
-	//Button btn;
 	HttpResponse response;
 	StringBuilder result = new StringBuilder();
 	TextView strRes;
@@ -57,6 +54,7 @@ public class MainActivity extends Activity {
     int itemindex;
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
+    ProgressDialog pDialog;
     
 	// Create a JSON object from the request response
 	JSONObject jsonObject = null;
@@ -65,8 +63,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//btn = (Button) findViewById(R.id.button1);
-		//txt = (EditText) findViewById(R.id.editText1);
+
 		lst_tv = (TextView) findViewById(R.id.rowTextView);
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
@@ -101,7 +98,7 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
-	        case R.id.drawer:
+	        case R.id.drawer: 				// id of drawer open-close icon
 	            if(drawer.isDrawerOpen(drawerlst) == false)
 	        	drawer.openDrawer(drawerlst);
 	            else 
@@ -115,11 +112,24 @@ public class MainActivity extends Activity {
 
 	class getdata extends AsyncTask<String, Void, String>
 	{
+		
+		@Override
+		protected void onPreExecute()
+		{
+		//spinner.VISIBLE = true;
+			pDialog = new ProgressDialog(MainActivity.this);
+		    pDialog.setMessage("Plese wait...");
+		    pDialog.setIndeterminate(true);
+		    pDialog.setCancelable(false);
+		    pDialog.show();
+		}
 
 		@Override
 		protected String doInBackground(String... arg0) {
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", ""));
+			ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
+			postParams.add(new BasicNameValuePair("network", ""));
+			postParams.add(new BasicNameValuePair("country", ""));
+			
 			//Create the HTTP request
 			HttpParams httpParameters = new BasicHttpParams();
 
@@ -128,22 +138,20 @@ public class MainActivity extends Activity {
 			HttpConnectionParams.setSoTimeout(httpParameters, 15000);			
 
 			HttpClient httpclient = new DefaultHttpClient(httpParameters);
-			HttpPost httppost = new HttpPost("http://192.168.10.3/oauth/test.php");
+			HttpPost httppost = new HttpPost("http://www.xpperts.com/test.php");
 	
-				try {
-					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			try {
+					httppost.setEntity(new UrlEncodedFormEntity(postParams));
 				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			
 				try {
 					response = httpclient.execute(httppost);
 				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		
@@ -152,36 +160,22 @@ public class MainActivity extends Activity {
 			try {
 				content = entity.getContent();
 			} catch (IllegalStateException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+	        
 	        try {
 				while ((line = reader.readLine()) != null) {
 				  result.append(line);
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//	try {
-				//	result = EntityUtils.toString(entity);
-				//} catch (ParseException e) {
-					// TODO Auto-generated catch block
-			//		e.printStackTrace();
-			//	} catch (IOException e) {
-					// TODO Auto-generated catch block
-				//	e.printStackTrace();
-			//	}
-
-				return result.toString();
-
-			
-	
-
+	        
+				return result.toString(); // return the json string to onPostExecute
 
 		}
 		
@@ -189,31 +183,28 @@ public class MainActivity extends Activity {
 		{
 			try {
 				JSONObject json=new JSONObject(result);
-				JSONArray jsonArray = json.getJSONArray("rss");
+				JSONArray jsonArray = json.getJSONArray("rss"); //get the items under the name RSS
 			      jsonArray.getJSONObject(1);
 			      int length = jsonArray.length();
 			      List<String> listContents = new ArrayList<String>(length);
 			      for (int i = 0; i < length; i++)
 			      {
 			        listContents.add(jsonArray.getJSONObject(i).getString("title"));
-			        Log.d("JSON ",jsonArray.getString(i));
-		    	    strRes.setText(jsonArray.getJSONObject(i).getString("description"));
+			       // Log.d("JSON ",jsonArray.getString(i));
 
 			      }
+	                getActionBar().setTitle(jsonArray.getJSONObject(0).getString("title"));
 
+		    	    strRes.setText(jsonArray.getJSONObject(0).getString("description"));
+
+			      // Put the custom_list_view.xml in the drawerView and populate it with the json titles
 			      drawerlst.setAdapter(new ArrayAdapter<String>(MainActivity.this, R.layout.custom_list_view, listContents));
+			      // Cancel the task if it still keeps running 
 	              this.cancel(true);
-			//	jsonObject = new JSONObject(result);
-		//	} catch (JSONException e) {
-				// TODO Auto-generated catch block
-		//		e.printStackTrace();
+	              pDialog.dismiss();
 			}
-
-			//try {
-				//strRes.setText(jsonObject.getString("FirstName"));
 				
 			catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -221,104 +212,22 @@ public class MainActivity extends Activity {
 		
 		
 	}
-	class getdetails extends AsyncTask<String, Void, String>
+	
+	class getdetails extends getdata
 	{
 
-		@Override
-		protected String doInBackground(String... arg0) {
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("FirstNameToSearch", ""));
-			//Create the HTTP request
-			HttpParams httpParameters = new BasicHttpParams();
-
-			//Setup timeouts
-			HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
-			HttpConnectionParams.setSoTimeout(httpParameters, 15000);			
-
-			HttpClient httpclient = new DefaultHttpClient(httpParameters);
-			HttpPost httppost = new HttpPost("http://192.168.10.3/oauth/test.json");
-
-				try {
-					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
-				try {
-					response = httpclient.execute(httppost);
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		
-			HttpEntity entity = response.getEntity();
-
-			try {
-				content = entity.getContent();
-			} catch (IllegalStateException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-	        try {
-				while ((line = reader.readLine()) != null) {
-				  result.append(line);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//	try {
-				//	result = EntityUtils.toString(entity);
-				//} catch (ParseException e) {
-					// TODO Auto-generated catch block
-			//		e.printStackTrace();
-			//	} catch (IOException e) {
-					// TODO Auto-generated catch block
-				//	e.printStackTrace();
-			//	}
-
-				return result.toString();
-
-			
-
-
-
-		}
-		
 		protected void onPostExecute(String result)
 		{
 			try {
 				JSONObject json=new JSONObject(result);
 				JSONArray jsonArray = json.getJSONArray("rss");
-			      jsonArray.length();
-
-			    	  //if(jsonArray.getString(0) == title)
-			    	  //{
-			    	   strRes.setText(jsonArray.getJSONObject(itemindex).getString("description"));
-			    	   // break;
-			    	  //}
-			      //}
-
-      
-			//	jsonObject = new JSONObject(result);
-		//	} catch (JSONException e) {
-				// TODO Auto-generated catch block
-		//		e.printStackTrace();
+			    strRes.setText(jsonArray.getJSONObject(itemindex).getString("description"));
+			    this.cancel(true);
+			    pDialog.dismiss();
 			}
 
-			//try {
-				//strRes.setText(jsonObject.getString("FirstName"));
 				
 			catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -330,16 +239,14 @@ public class MainActivity extends Activity {
 	
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {   //menu items
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-//	    inflater.inflate(R.menu.game_menu, menu);
+		getMenuInflater().inflate(R.menu.main, menu);// actionbar menu item drawer open close
 
 		return true;
 	}
 	
 	private void addListenerOnButton() {
-		// TODO Auto-generated method stub
 	
 /*btn.setOnTouchListener(new OnTouchListener() {
 	
