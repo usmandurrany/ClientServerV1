@@ -26,6 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.ud.clientserverv1.LiveViewActivity" />
+            <activity android:name="com.ud.clientserverv1.GCM" />
+        
     </application>
 
 </manifest>
