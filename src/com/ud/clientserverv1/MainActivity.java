@@ -77,8 +77,10 @@ public class MainActivity extends Activity {
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
-		Intent GCM = new Intent(this, GCM.class);
-		startActivity(GCM);
+//		Intent GCM = new Intent(this, GCM.class);
+	//	startActivity(GCM);
+		
+		GCM gcmClass = new GCM(this);
 		
 		addListenerOnButton();
 		getdata gd = new getdata();

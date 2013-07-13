@@ -30,7 +30,7 @@ import android.widget.Toast;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
-public class GCM extends Activity
+public class GCM
 {
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
@@ -60,14 +60,14 @@ public class GCM extends Activity
     String regid;
 	gcmRegServer gRS = new gcmRegServer();
 
-	public void onCreate(Bundle savedInstanceState)
+	public GCM(Context con)
 	{
-		super.onCreate(savedInstanceState);
-		context = getApplicationContext();
+	
+		context = con;
         regid = getRegistrationId(context);
 
         if (regid.length() == 0) {
-        	Toast.makeText(this, regid + "Not registered", Toast.LENGTH_LONG).show();
+        	Toast.makeText(context, regid + "Not registered", Toast.LENGTH_LONG).show();
 
             registerBackground();
         }
@@ -75,7 +75,7 @@ public class GCM extends Activity
         	//Toast.makeText(this, regid, Toast.LENGTH_LONG).show();
         //Log.w("REG ID",regid);
         	//gRS.execute();
-        gcm = GoogleCloudMessaging.getInstance(this);
+        gcm = GoogleCloudMessaging.getInstance(context);
 
 	}
 	class gcmRegServer extends AsyncTask<String, Void, String>
@@ -142,7 +142,7 @@ public class GCM extends Activity
 	 * @return Application's {@code SharedPreferences}.
 	 */
 	private SharedPreferences getGCMPreferences(Context context) {
-	    return getSharedPreferences(GCM.class.getSimpleName(), 
+	    return context.getSharedPreferences(GCM.class.getSimpleName(), 
 	            Context.MODE_PRIVATE);
 	}
 	private static int getAppVersion(Context context) {

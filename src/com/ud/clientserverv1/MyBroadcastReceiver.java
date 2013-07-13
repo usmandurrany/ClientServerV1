@@ -44,7 +44,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 	                ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 
 	        PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0,
-	                new Intent(ctx, GCM.class), 0);
+	                new Intent(ctx, MainActivity.class), 0);
 	        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 	        NotificationCompat.Builder mBuilder =
 	                new NotificationCompat.Builder(ctx)
