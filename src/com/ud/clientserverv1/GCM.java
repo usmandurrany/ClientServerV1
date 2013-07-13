@@ -15,11 +15,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
-class GCM extends Activity
+public class GCM extends Activity
 {
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
@@ -34,7 +35,7 @@ class GCM extends Activity
     /**
      * Substitute you own sender ID here.
      */
-    String SENDER_ID = "Your-Sender-ID";
+    String SENDER_ID = "23726717107";
 
     /**
      * Tag used on log messages.
@@ -54,8 +55,13 @@ class GCM extends Activity
         regid = getRegistrationId(context);
 
         if (regid.length() == 0) {
+        	Toast.makeText(this, regid + "Not registered", Toast.LENGTH_LONG).show();
+
             registerBackground();
         }
+        else 
+        	//Toast.makeText(this, regid, Toast.LENGTH_LONG).show();
+        Log.w("REG ID",regid);
         gcm = GoogleCloudMessaging.getInstance(this);
 
 	}
@@ -170,49 +176,5 @@ class GCM extends Activity
 	    editor.putLong(PROPERTY_ON_SERVER_EXPIRATION_TIME, expirationTime);
 	    editor.commit();
 	}
-	/**
-	 * Handling of GCM messages.
-	 */
-	public class GcmBroadcastReceiver extends BroadcastReceiver {
-	    static final String TAG = "GCMDemo";
-	    public static final int NOTIFICATION_ID = 1;
-	    private NotificationManager mNotificationManager;
-	    NotificationCompat.Builder builder;
-	    Context ctx;
-	    @Override
-	    public void onReceive(Context context, Intent intent) {
-	        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
-	        ctx = context;
-	        String messageType = gcm.getMessageType(intent);
-	        if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-	            sendNotification("Send error: " + intent.getExtras().toString());
-	        } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-	            sendNotification("Deleted messages on server: " +
-	                    intent.getExtras().toString());
-	        } else {
-	            sendNotification("Received: " + intent.getExtras().toString());
-	        }
-	        setResultCode(Activity.RESULT_OK);
-	    }
-
-	    // Put the GCM message into a notification and post it.
-	    private void sendNotification(String msg) {
-	        mNotificationManager = (NotificationManager)
-	                ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-
-	        PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0,
-	                new Intent(ctx, GCM.class), 0);
-
-	        NotificationCompat.Builder mBuilder =
-	                new NotificationCompat.Builder(ctx)
-	        .setSmallIcon(R.drawable.ic_launcher)
-	        .setContentTitle("GCM Notification")
-	        .setStyle(new NotificationCompat.BigTextStyle()
-	        .bigText(msg))
-	        .setContentText(msg);
-
-	        mBuilder.setContentIntent(contentIntent);
-	        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
-	    }
-	}
+	
 }
