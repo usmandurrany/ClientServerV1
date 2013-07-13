@@ -108,6 +108,7 @@ public class MainActivity extends Activity {
         drawer.setDrawerListener(mDrawerToggle);
     }
 	
+		
 	/*class urlparse extends AsyncTask<String,Void,String>
 	{
 		protected String doInBackground(String... arg0)

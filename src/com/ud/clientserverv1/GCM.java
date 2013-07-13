@@ -1,19 +1,29 @@
 package com.ud.clientserverv1;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -41,12 +51,14 @@ public class GCM extends Activity
      * Tag used on log messages.
      */
     static final String TAG = "GCMDemo";
+    HttpResponse response;
 
 	
 	GoogleCloudMessaging gcm;
     SharedPreferences prefs;
     Context context;
     String regid;
+	gcmRegServer gRS = new gcmRegServer();
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -61,10 +73,52 @@ public class GCM extends Activity
         }
         else 
         	//Toast.makeText(this, regid, Toast.LENGTH_LONG).show();
-        Log.w("REG ID",regid);
+        //Log.w("REG ID",regid);
+        	//gRS.execute();
         gcm = GoogleCloudMessaging.getInstance(this);
 
 	}
+	class gcmRegServer extends AsyncTask<String, Void, String>
+	{
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			ArrayList<NameValuePair> gcmParams = new ArrayList<NameValuePair>();
+			gcmParams.add(new BasicNameValuePair("name",android.os.Build.MODEL));
+			gcmParams.add(new BasicNameValuePair("email",""));
+			gcmParams.add(new BasicNameValuePair("regId",regid));
+			
+			HttpParams httpParams = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(httpParams, 15000);
+			HttpConnectionParams.setSoTimeout(httpParams, 15000);	
+			
+			HttpClient httpclient = new DefaultHttpClient(httpParams);
+			HttpPost httppost = new HttpPost("http://www.xpperts.com/register.php");
+			
+			try {
+				httppost.setEntity(new UrlEncodedFormEntity(gcmParams));
+			} catch (UnsupportedEncodingException e) {
+			
+				e.printStackTrace();
+			}
+		
+			try {
+				response = httpclient.execute(httppost);
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+		
+			}
+			return regid;
+		}
+		@Override
+		protected void onPostExecute(String string)
+		{
+			Log.e("GRS","RegId Sent "+ regid);
+		}
+	}
+
 
 	private String getRegistrationId(Context context) {
 	    final SharedPreferences prefs = getGCMPreferences(context);
@@ -147,6 +201,7 @@ public class GCM extends Activity
 	                // using the 'from' address in the message.
 
 	                // Save the regid - no need to register again.
+	            	gRS.execute();
 	                setRegistrationId(context, regid);
 	            } catch (IOException ex) {
 	                msg = "Error :" + ex.getMessage();
