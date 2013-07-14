@@ -2,8 +2,7 @@ package com.ud.clientserverv1;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,6 +26,7 @@ public class LiveViewActivity extends Activity
 
 		setContentView(R.layout.activiry_live_view);
 		getActionBar().setTitle("Live Stream");
+	/*
 		videoLoading = new ProgressDialog(this);
 
 		mVideoView = (VideoView) findViewById(R.id.videoView1);
@@ -50,10 +50,10 @@ public class LiveViewActivity extends Activity
                 videoLoading.dismiss();
             }
         });
-    
+    */
 		 
 		
-		/*popup = new AlertDialog.Builder(this);
+		popup = new AlertDialog.Builder(this);
 		popup.setMessage("Coming Soon");
 		popup.setCancelable(false);
 		popup.setPositiveButton("Back", new DialogInterface.OnClickListener() {
@@ -65,7 +65,7 @@ public class LiveViewActivity extends Activity
 			}
 			});
 		
-		popup.show(); */
+		popup.show();
 		
 	}
 	@Override
