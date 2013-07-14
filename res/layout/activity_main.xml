@@ -4,16 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
+    <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+        
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
+<ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/nonews"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
 
-<ScrollView 
-    		android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
+    
 
     <TextView
         android:id="@+id/textView1"
@@ -21,12 +30,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="205dp"
         android:text="Select a news from the sidebar" />
-</ScrollView>
 
     </RelativeLayout>
-
+</ScrollView>
+    
     <ListView
         android:id="@+id/left_drawer"
         android:layout_width="match_parent"

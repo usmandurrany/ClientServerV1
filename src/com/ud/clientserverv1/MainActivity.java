@@ -1,32 +1,22 @@
 package com.ud.clientserverv1;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,12 +25,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 
@@ -61,13 +55,17 @@ public class MainActivity extends Activity {
     VideoView mVideoView;
     Uri uri;
     MediaController mediaController;
-	//Document doc;
-
-	
-	// Create a JSON object from the request response
-	JSONObject jsonObject = null;
-	
-	
+	Document doc;
+	Document cleanDoc;
+	Elements link;
+	Elements desc;
+	String description;
+    String newsRSS1= "http://dunyanews.tv/news.xml";
+    String url;
+    ImageView newshead;
+    String imgSrc;
+    Bitmap bitmap;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,16 +75,16 @@ public class MainActivity extends Activity {
 		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
-//		Intent GCM = new Intent(this, GCM.class);
-	//	startActivity(GCM);
-		
+		newshead =  (ImageView) findViewById(R.id.imageView1);
+
+		@SuppressWarnings("unused")
 		GCM gcmClass = new GCM(this);
 		
 		addListenerOnButton();
-		getdata gd = new getdata();
+		getTitle gtitle = new getTitle();
         mediaController = new MediaController(this);
 
-		gd.execute();
+		gtitle.execute();
 		
 		
 		
@@ -111,36 +109,7 @@ public class MainActivity extends Activity {
     }
 	
 		
-	/*class urlparse extends AsyncTask<String,Void,String>
-	{
-		protected String doInBackground(String... arg0)
-		{
-			try {
-				doc = Jsoup.parse(new URL("http://www.google.com"), 2000);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return "none";
-			
-		}
-		protected void onPostExecute(String document)
-		{
-
-            Elements resultLinks = doc.select("a");
-            Toast.makeText(MainActivity.this, "number of links: " + resultLinks.size(),Toast.LENGTH_LONG).show();
-            for (Element link : resultLinks) {
-                System.out.println();
-                String href = link.attr("href");
-           //     System.out.println("Title: " + link.text());
-	            //Toast.makeText(this, "number of links: " + resultLinks.size(),Toast.LENGTH_LONG);
-            }
-		}
-	} */
-
+	
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
@@ -152,14 +121,10 @@ public class MainActivity extends Activity {
 	            	drawer.closeDrawer(drawerlst);
 	            return true;
 	        case R.id.liveView:
-	        //	setContentView(R.layout.activiry_live_view);
 	 
 	    		Intent liveView = new Intent(MainActivity.this, LiveViewActivity.class);
 	    		startActivity(liveView);
 	    		overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-	        	
-	        	//urlparse uparse = new urlparse();
-	        	//uparse.execute();
 
 	    		return true;
 
@@ -168,7 +133,7 @@ public class MainActivity extends Activity {
 	    }
 	}
 
-	class getdata extends AsyncTask<String, Void, String>
+	class getTitle extends AsyncTask<String, Void, String>
 	{
 		
 		@Override
@@ -184,118 +149,131 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected String doInBackground(String... arg0) {
-			ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
-			postParams.add(new BasicNameValuePair("network", ""));
-			postParams.add(new BasicNameValuePair("country", ""));
-			
-			//Create the HTTP request
-			HttpParams httpParameters = new BasicHttpParams();
-
-			//Setup timeouts
-			HttpConnectionParams.setConnectionTimeout(httpParameters, 15000);
-			HttpConnectionParams.setSoTimeout(httpParameters, 15000);			
-
-			HttpClient httpclient = new DefaultHttpClient(httpParameters);
-			HttpPost httppost = new HttpPost("http://www.xpperts.com/test.php");
-	
 			try {
-					httppost.setEntity(new UrlEncodedFormEntity(postParams));
-				} catch (UnsupportedEncodingException e) {
-				
-					e.printStackTrace();
-				}
-			
-				try {
-					response = httpclient.execute(httppost);
-				} catch (ClientProtocolException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		
-			HttpEntity entity = response.getEntity();
-
-			try {
-				content = entity.getContent();
-			} catch (IllegalStateException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-	        
-	        try {
-				while ((line = reader.readLine()) != null) {
-				  result.append(line);
-				}
+				doc = Jsoup.parse(new URL(newsRSS1), 2000);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	        
-				return result.toString(); // return the json string to onPostExecute
-
+			return "none";
+			
 		}
 		
 		protected void onPostExecute(String result)
 		{
-			try {
-				JSONObject json=new JSONObject(result);
-				JSONArray jsonArray = json.getJSONArray("rss"); //get the items under the name RSS
-			      jsonArray.getJSONObject(1);
-			      int length = jsonArray.length();
-			      List<String> listContents = new ArrayList<String>(length);
-			      for (int i = 0; i < length; i++)
+			
+			   Elements getTitle = doc.select("title");
+			      List<String> listContents = new ArrayList<String>(getTitle.size());
+
+			   for (int i = 2; i < getTitle.size(); i++)
 			      {
-			        listContents.add(jsonArray.getJSONObject(i).getString("title"));
-			       // Log.d("JSON ",jsonArray.getString(i));
+			        listContents.add(getTitle.get(i).text());
 
 			      }
-	                getActionBar().setTitle(jsonArray.getJSONObject(0).getString("title"));
-
-		    	    strRes.setText(jsonArray.getJSONObject(0).getString("description"));
-
-			      // Put the custom_list_view.xml in the drawerView and populate it with the json titles
 			      drawerlst.setAdapter(new ArrayAdapter<String>(MainActivity.this, R.layout.custom_list_view, listContents));
-			      // Cancel the task if it still keeps running 
-	              this.cancel(true);
+
 	              pDialog.dismiss();
-			}
-				
-			catch (JSONException e) {
-				e.printStackTrace();
-			}
 
 		}
-		
-		
 	}
 	
-	class getdetails extends getdata
+	class getLink extends getTitle
 	{
-
-		protected void onPostExecute(String result)
+		@Override
+		protected String doInBackground(String... arg0)
 		{
 			try {
-				JSONObject json=new JSONObject(result);
-				JSONArray jsonArray = json.getJSONArray("rss");
-			    strRes.setText(jsonArray.getJSONObject(itemindex).getString("description"));
-			    this.cancel(true);
-			    pDialog.dismiss();
-			}
-
-				
-			catch (JSONException e) {
+				doc = Jsoup.parse(new URL(newsRSS1), 2000);
+								
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			return "none";
+			
+		}
+		@Override
+		protected void onPostExecute(String document)
+		{
+			link = doc.select("item > link");
+			desc = doc.select("item > description");
+			url = link.get(itemindex).nextSibling().toString();
+			description = desc.get(itemindex).text();
+		    Toast.makeText(MainActivity.this, link.get(itemindex).nextSibling().toString(),Toast.LENGTH_LONG).show();
+		    getDesc gdesc = new getDesc();
+		    gdesc.execute();
+		    this.cancel(true);
+            
 		}
 		
 		
 	}
 
-	
+	class getDesc extends AsyncTask<String, Void, String>
+	{
 
+		
+		@Override
+		protected String doInBackground(String... params) {
+			try {
+				doc = Jsoup.parse(new URL(url),5000);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		@Override
+		protected void onPostExecute(String string)
+		{
+			Elements result = doc.select("div#main-heading_detail > div.txt2_um");
+			Elements image = doc.select("div#main-heading_detail > img");
+			imgSrc = image.attr("src");
+			
+				new AsyncTask<String,Void,String>()
+				{
+
+					@Override
+					protected String doInBackground(String... params) {
+						  try {
+							bitmap = BitmapFactory.decodeStream((InputStream)new URL(imgSrc).getContent());
+						} catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return null;
+					}
+					
+				protected void onPostExecute(String string)
+				{
+					newshead.setImageBitmap(bitmap);
+				    Animation fadeInAnimation = AnimationUtils.loadAnimation(MainActivity.this,android.R.anim.fade_in);		
+				    newshead.startAnimation(fadeInAnimation);
+				}
+					
+				}.execute();
+			
+				
+			Toast.makeText(MainActivity.this, image.attr("src"), Toast.LENGTH_LONG).show();
+		  if (result.text().length() < 10)
+			strRes.setText(description);
+
+		  else 
+			strRes.setText(result.text());
+		    
+            pDialog.dismiss();	
+		}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {   //menu items
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -306,26 +284,15 @@ public class MainActivity extends Activity {
 	
 	private void addListenerOnButton() {
 	
-/*btn.setOnTouchListener(new OnTouchListener() {
-	
-
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-				//txt.setText("Usman Durrani");
-			getdata gd = new getdata();
-			gd.execute();
-		return false;
-	}
-		});*/
 		drawerlst.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 			    {
 			      title = (drawerlst.getItemAtPosition(position).toString());
 			      itemindex = position;
 					//Toast.makeText(getBaseContext(), , Toast.LENGTH_LONG).show();
-					getdetails gdet = new getdetails();
+					getLink gdesc = new getLink();
 
-					gdet.execute();
+					gdesc.execute();
 					drawer.closeDrawer(drawerlst);
 			    }});
 		
@@ -334,6 +301,7 @@ public class MainActivity extends Activity {
 	
 
 
+	
 
-
-}
+	
+	}
