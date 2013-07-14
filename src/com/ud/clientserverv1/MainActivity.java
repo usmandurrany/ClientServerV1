@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
     String line;
     TextView lst_tv;
     String title;
-    int itemindex;
+    int itemindex = 0;
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
     ProgressDialog pDialog;
@@ -65,7 +65,8 @@ public class MainActivity extends Activity {
     ImageView newshead;
     String imgSrc;
     Bitmap bitmap;
-    
+    getLink glink = new getLink();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +78,8 @@ public class MainActivity extends Activity {
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
 		newshead =  (ImageView) findViewById(R.id.imageView1);
 
+		AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
+		aua.checkUpdates(true);
 		@SuppressWarnings("unused")
 		GCM gcmClass = new GCM(this);
 		
@@ -127,6 +130,9 @@ public class MainActivity extends Activity {
 	    		overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
 	    		return true;
+	        case R.id.exit:
+	        	MainActivity.this.finish();
+	        
 
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -172,8 +178,8 @@ public class MainActivity extends Activity {
 
 			      }
 			      drawerlst.setAdapter(new ArrayAdapter<String>(MainActivity.this, R.layout.custom_list_view, listContents));
-
 	              pDialog.dismiss();
+			      glink.execute();
 
 		}
 	}

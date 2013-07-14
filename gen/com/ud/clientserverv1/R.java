@@ -31,6 +31,7 @@ public final class R {
         public static final int content_frame=0x7f080001;
         public static final int drawer=0x7f080007;
         public static final int drawer_layout=0x7f080000;
+        public static final int exit=0x7f080009;
         public static final int imageView1=0x7f080004;
         public static final int left_drawer=0x7f080003;
         public static final int liveView=0x7f080008;
