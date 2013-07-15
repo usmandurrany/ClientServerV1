@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.ProgressDialog;
@@ -18,10 +19,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class getNews
 {
@@ -41,6 +42,7 @@ String title;
 //int itemindex = 0;
 DrawerLayout drawer;
 ProgressDialog pDialog;
+
 Uri uri;
 Document doc;
 Elements link;
@@ -64,22 +66,22 @@ class getTitle extends AsyncTask<String, Void, String>
 		@Override
 		protected void onPreExecute()
 		{
-		//spinner.VISIBLE = true;
 			pDialog = new ProgressDialog(context);
-		    pDialog.setMessage("Plese wait...");
-		    pDialog.setIndeterminate(true);
-		    pDialog.setCancelable(false);
+			pDialog.setMessage("Plese wait...");
+			pDialog.setIndeterminate(true);
+			pDialog.setCancelable(false);			
 		    pDialog.show();
 		}
 
 		@Override
 		protected String doInBackground(String... arg0) {
 			try {
-				doc = Jsoup.parse(new URL(newsRSS1), 2000);
+				doc = Jsoup.parse(new URL(newsRSS1), 5000);
 			} catch (MalformedURLException e) {
-				e.printStackTrace();
+				Log.e("Malformed URL",newsRSS1);
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.e("IO Exception",e.toString());
+
 			}
 			return null;
 			
@@ -88,36 +90,38 @@ class getTitle extends AsyncTask<String, Void, String>
 		protected void onPostExecute(String result)
 		{
 			
-				Elements getTitle = doc.select("title");
+				Elements getTitle = doc.select("item > title");
 			      List<String> listContents = new ArrayList<String>(getTitle.size());
 
-			   for (int i = 2; i < getTitle.size(); i++)
+			   //for (int i = 2; i < getTitle.size(); i++)
+			      for (Element e : getTitle)
 			      {
-			        listContents.add(getTitle.get(i).text());
+			        listContents.add(e.text());
 
 			      }
-	              pDialog.dismiss();
 			     // glink.execute(0);
 			     delegate.resultTitle(listContents);
+			     pDialog.dismiss();
+
 			      
 		}
 	}
 	
-	class getLink extends AsyncTask<Integer,Void,Integer>
+class getLink extends AsyncTask<Integer,Void,Integer>
 	{
 		public IAsyncResult delegate;
-		
+
+
 		@Override
 		protected Integer doInBackground(Integer... arg0)
 		{
+
 			try {
-				doc = Jsoup.parse(new URL(newsRSS1), 2000);
+				doc = Jsoup.parse(new URL(newsRSS1), 1000);
 								
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return arg0[0];
@@ -133,28 +137,23 @@ class getTitle extends AsyncTask<String, Void, String>
 		    delegate.resultLink(url, description);
 		    //Toast.makeText(context, link.get(itemindex).nextSibling().toString(),Toast.LENGTH_LONG).show();
 		   // gdesc.execute();
-		    this.cancel(true);
-            
+//		    pDialog.dismiss();
 		}
 		
 		
 	}
 
-	class getDesc extends AsyncTask<String, Void, String>
+class getDesc extends AsyncTask<String, Void, String>
 	{
 		public IAsyncResult delegate;
-
-
 		
 		@Override
 		protected String doInBackground(String... params) {
 			try {
-				doc = Jsoup.parse(new URL(url),10000);
+				doc = Jsoup.parse(new URL(url),5000);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return params[0];
@@ -165,7 +164,7 @@ class getTitle extends AsyncTask<String, Void, String>
 			result = doc.select("div#main-heading_detail > div.txt2_um");
 			Elements image = doc.select("div#main-heading_detail > img[src]");
 			imgSrc = image.attr("src");
-			Toast.makeText(context, imgSrc, Toast.LENGTH_LONG).show();
+		//	Toast.makeText(context, imgSrc, Toast.LENGTH_LONG).show();//Image link that is retrieved from the sent url
 
 				new AsyncTask<String,Void,String>()
 				{
@@ -175,10 +174,10 @@ class getTitle extends AsyncTask<String, Void, String>
 						  try {
 							bitmap = BitmapFactory.decodeStream((InputStream)new URL(imgSrc).getContent());
 						} catch (MalformedURLException e) {
-							// TODO Auto-generated catch block
+							pDialog.dismiss();	
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							pDialog.dismiss();	
 							e.printStackTrace();
 						}
 						return null;
@@ -191,15 +190,10 @@ class getTitle extends AsyncTask<String, Void, String>
 				}
 					
 				}.execute();
-			
-			Toast.makeText(context, string, Toast.LENGTH_LONG).show();
-		  //if (result.text().length() < 10)
-		//	strRes.setText(description);
+				//pDialog.dismiss();	
 
-		  //else 
-			//strRes.setText(result.text());
-		    
-          //  pDialog.dismiss();	
+			//Toast.makeText(context, string, Toast.LENGTH_LONG).show(); //Url being sent to this task
+
 		}
 	}
 }

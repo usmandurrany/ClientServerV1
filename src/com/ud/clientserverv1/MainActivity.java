@@ -76,14 +76,11 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
 		newshead =  (ImageView) findViewById(R.id.imageView1);
 		
-	gettitle.delegate=this;
+		gettitle.delegate=this;
 		getlink.delegate=this;
 		getdesc.delegate=this;
 		
 		gettitle.execute();
-		getlink.execute(0);
-		getdesc.execute(url);
-		
 
 		
 	    final ActionBar actionBar = getActionBar();
@@ -92,7 +89,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.addTab(
                 actionBar.newTab()
-                        .setText("All News")
+                        .setText("Dunya News")
                         .setTabListener(new ActionBar.TabListener() {
 							
 							@Override
@@ -104,6 +101,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 							@Override
 							public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
 								getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left,0).replace(R.id.content_frame,allnews).commit();
+								
 							}
 							
 							@Override
@@ -112,7 +110,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 								
 							}
 						}));
-	    actionBar.addTab(actionBar.newTab().setText("Live View").setTabListener(new ActionBar.TabListener() {
+	    actionBar.addTab(actionBar.newTab().setText("Geo News").setTabListener(new ActionBar.TabListener() {
 			
 			@Override
 			public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
@@ -137,9 +135,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		}));
 
 	    
-	   getSupportFragmentManager().beginTransaction()
-        .replace(R.id.content_frame, allnews).commit();
-
+	   getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, allnews).commit();
 
 		
 		//AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
@@ -235,6 +231,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 
 	@Override
 	public void resultTitle(List<String> listContents) {
+		
 		drawerlst.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_list_view,listContents));
 		
 	}
@@ -245,11 +242,13 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 	@Override
 	public void resultLink(String url, String desc) {
 		this.url = url;
+		  // Toast.makeText(this, getSupportFragmentManager().findFragmentById(R.id.content_frame).toString(), Toast.LENGTH_LONG).show();
+if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== allnews){
 		//Toast.makeText(this, url, Toast.LENGTH_LONG).show();
-
         ((TextView) allnews.getView().findViewById(R.id.textView1)).setText(desc);  
 		//strRes.setText(desc);
-		
+}
+
 	}
 
 
@@ -257,7 +256,10 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 
 	@Override
 	public void resultDesc(String str, Bitmap image) {
-        ((ImageView) allnews.getView().findViewById(R.id.imageView1)).setImageBitmap(image);  
+		if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== allnews){
+
+	        ((ImageView) allnews.getView().findViewById(R.id.imageView1)).setImageBitmap(image);
+			}
 		
 	}
 	
