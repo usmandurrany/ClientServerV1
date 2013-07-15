@@ -23,6 +23,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class getNews
 {
@@ -48,7 +49,7 @@ Document doc;
 Elements link;
 Elements desc;
 String description;
-String newsRSS1= "http://dunyanews.tv/news.xml";
+String newsRSS1= "http://m.dunyanews.tv/caller.php?q=hd&n=0";
 String url;
 ImageView newshead;
 String imgSrc;
@@ -56,8 +57,11 @@ Bitmap bitmap;
 Elements result;
 getLink glink = new getLink();
 getDesc gdesc = new getDesc();
-
-
+String[] links;
+String[] titles;
+List<Bitmap> listImg;
+List<String> listDesc;
+List<String> listTitle;
 class getTitle extends AsyncTask<String, Void, String>
 	{
 	public IAsyncResult delegate;
@@ -90,19 +94,65 @@ class getTitle extends AsyncTask<String, Void, String>
 		protected void onPostExecute(String result)
 		{
 			
-				Elements getTitle = doc.select("item > title");
-			      List<String> listContents = new ArrayList<String>(getTitle.size());
+				Elements getTitle = doc.select("div.news-panel > a > h2");
+				Elements getDesc  = doc.select("div.news-panel > p");
+				Elements getImgLink = doc.select("div.news-panel > p > img[src]");
 
+				listTitle = new ArrayList<String>(getTitle.size());
+			    listDesc = new ArrayList<String>(getDesc.size());
+			    listImg = new ArrayList<Bitmap>(getImgLink.size());
+			      
+			      
 			   //for (int i = 2; i < getTitle.size(); i++)
 			      for (Element e : getTitle)
+			          listTitle.add(e.text());
+			      
+			      for (Element e : getDesc)
+				      listDesc.add(e.text());
+			      
+			  	links = new String[getImgLink.size()];
+				for(int i=0; i< getTitle.size();i++){
+					links[i] = getImgLink.get(i).attr("src");
+					//Toast.makeText(context, getImgLink.get(i).attr("src").toString(), Toast.LENGTH_LONG).show();
+				}
+
+
+			      new AsyncTask<String,Void,String>()
 			      {
-			        listContents.add(e.text());
 
-			      }
+					@Override
+					protected String doInBackground(String... params) {
+					for(String s : params)
+					{
+						try {
+							bitmap = BitmapFactory.decodeStream((InputStream)new URL(s).getContent());
+						} catch (MalformedURLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							
+						}
+
+						listImg.add(bitmap);
+						
+					}
+						return null;
+					}
+					@Override
+					public void onPostExecute(String args)
+					{
+					//	Toast.makeText(context, listImg.size(), Toast.LENGTH_LONG).show();
+						delegate.resultTitle(listTitle, listImg);
+					     pDialog.dismiss();
+					}
+			    	  
+			      }.execute(links);
+			      
 			     // glink.execute(0);
-			     delegate.resultTitle(listContents);
-			     pDialog.dismiss();
-
+			     
+			      
 			      
 		}
 	}

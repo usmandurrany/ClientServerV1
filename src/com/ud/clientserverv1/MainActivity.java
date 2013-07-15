@@ -230,9 +230,9 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 
 
 	@Override
-	public void resultTitle(List<String> listContents) {
+	public void resultTitle(List<String> listTitle, List<Bitmap> listImg) {
 		
-		drawerlst.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_list_view,listContents));
+		drawerlst.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_list_view,listTitle));
 		
 	}
 

@@ -5,7 +5,7 @@ import java.util.List;
 import android.graphics.Bitmap;
 
 public interface IAsyncResult {
-void resultTitle(List<String> listContents);
+void resultTitle(List<String> listTitle, List<Bitmap> listImg);
 void resultLink(String url, String desc);
 void resultDesc(String str, Bitmap image);
 }

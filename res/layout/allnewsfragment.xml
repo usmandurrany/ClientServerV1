@@ -1,24 +1,13 @@
-  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation = "horizontal"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/news"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
-       <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/nonews"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
-    
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="216dp"
-        android:text="Select a news from the sidebar" />
- 
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="0dp"
+        android:background="#000"
+        android:choiceMode="singleChoice"
+        android:divider="@color/Black"
+        android:dividerHeight="1dp"
+        android:scrollbars="vertical" />     
+      
