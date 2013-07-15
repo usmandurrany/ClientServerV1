@@ -24,7 +24,7 @@ public class LiveViewActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activiry_live_view);
+		setContentView(R.layout.liveviewfragment);
 		getActionBar().setTitle("Live Stream");
 	/*
 		videoLoading = new ProgressDialog(this);

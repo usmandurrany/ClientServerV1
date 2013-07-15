@@ -28,21 +28,23 @@ public final class R {
         public static final int nonews=0x7f020004;
     }
     public static final class id {
-        public static final int content_frame=0x7f080001;
-        public static final int drawer=0x7f080007;
+        public static final int content_frame=0x7f080002;
+        public static final int drawer=0x7f080008;
         public static final int drawer_layout=0x7f080000;
-        public static final int exit=0x7f080009;
+        public static final int exit=0x7f08000a;
         public static final int imageView1=0x7f080004;
         public static final int left_drawer=0x7f080003;
-        public static final int liveView=0x7f080008;
+        public static final int liveView=0x7f080009;
         public static final int rowTextView=0x7f080006;
+        public static final int scrollView1=0x7f080001;
         public static final int textView1=0x7f080005;
-        public static final int videoView1=0x7f080002;
+        public static final int videoView1=0x7f080007;
     }
     public static final class layout {
-        public static final int activiry_live_view=0x7f030000;
-        public static final int activity_main=0x7f030001;
+        public static final int activity_main=0x7f030000;
+        public static final int allnewsfragment=0x7f030001;
         public static final int custom_list_view=0x7f030002;
+        public static final int liveviewfragment=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
