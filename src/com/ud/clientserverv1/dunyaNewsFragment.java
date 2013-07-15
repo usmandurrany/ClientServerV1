@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 
 
-public class allNewsFragment extends Fragment implements IAsyncResult {
+public class dunyaNewsFragment extends Fragment implements IAsyncResult {
 
 String url;
 ListView listView;
@@ -26,7 +26,7 @@ Bitmap icon ;
  @Override
  public View onCreateView(LayoutInflater inflater, ViewGroup container,
    Bundle savedInstanceState) {
-  View myFragmentView = inflater.inflate(R.layout.allnewsfragment, container, false);
+  View myFragmentView = inflater.inflate(R.layout.dunyanewsfragment, container, false);
 	 getNews getnews = new getNews(getActivity());
 		getNews.getTitle gettitle = getnews.new getTitle();
 		getNews.getLink getlink = getnews.new getLink();

@@ -1,18 +1,12 @@
 package com.ud.clientserverv1;
 
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
 import android.app.ActionBar;
-import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -25,41 +19,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 
 public class MainActivity extends FragmentActivity implements IAsyncResult {
 
-	HttpResponse response;
-	StringBuilder result = new StringBuilder();
-	TextView strRes;
 	ListView drawerlst;
-    InputStream content;
-    String line;
-    TextView lst_tv;
     String title;
     int itemindex = 0;
     DrawerLayout drawer;
-    ActionBarDrawerToggle mDrawerToggle;
-    ProgressDialog pDialog;
-    VideoView mVideoView;
-    Uri uri;
-    MediaController mediaController;
-	Document doc;
-	Document cleanDoc;
-	Elements link;
-	Elements desc;
-	String description;
-    String newsRSS1= "http://dunyanews.tv/news.xml";
     String url;
-    ImageView newshead;
-    String imgSrc;
-    Bitmap bitmap;
-    allNewsFragment allnews = new allNewsFragment();
-    liveViewFragment liveview = new liveViewFragment();
+    ActionBarDrawerToggle mDrawerToggle;
+    dunyaNewsFragment dunya = new dunyaNewsFragment();
+    geoNewsFragment geo = new geoNewsFragment();
 
     getNews getnews = new getNews(this);
 	getNews.getTitle gettitle = getnews.new getTitle();
@@ -70,17 +42,23 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_main);
-		lst_tv = (TextView) findViewById(R.id.rowTextView);
-		strRes = (TextView) findViewById(R.id.textView1);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
-		newshead =  (ImageView) findViewById(R.id.imageView1);
 		
 		gettitle.delegate=this;
 		getlink.delegate=this;
 		getdesc.delegate=this;
 		
-		gettitle.execute();
+//		gettitle.execute();
+		List<String> listCategories = new ArrayList<String>(7);
+		listCategories.add("Headlines");
+		listCategories.add("Pakistan");
+		listCategories.add("World");
+		listCategories.add("Sports");
+		listCategories.add("Entertainment");
+		listCategories.add("Business");
+		drawerlst.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_list_view,listCategories));
+
 
 		
 	    final ActionBar actionBar = getActionBar();
@@ -100,7 +78,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 							
 							@Override
 							public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-								getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left,0).replace(R.id.content_frame,allnews).commit();
+								getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left,0).replace(R.id.content_frame,dunya).commit();
 								
 							}
 							
@@ -120,7 +98,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 			
 			@Override
 			public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
-				getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,0).replace(R.id.content_frame,liveview).commit();
+				getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,0).replace(R.id.content_frame,geo).commit();
 				
 
 
@@ -135,7 +113,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		}));
 
 	    
-	   getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, allnews).commit();
+	   getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, dunya).commit();
 
 		
 		//AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
@@ -144,7 +122,6 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		GCM gcmClass = new GCM(this);
 		
 		addListenerOnButton();
-        mediaController = new MediaController(this);
 
 		//gtitle.execute();
 		
@@ -213,13 +190,13 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 			    {
 			      title = (drawerlst.getItemAtPosition(position).toString());
 			      itemindex = position;
-					//Toast.makeText(getBaseContext(), , Toast.LENGTH_LONG).show();
+			/*		//Toast.makeText(getBaseContext(), , Toast.LENGTH_LONG).show();
 			  	getlink = getnews.new getLink();
 				getdesc = getnews.new getDesc();
 				getlink.delegate=MainActivity.this;
 				getdesc.delegate=MainActivity.this;
 			      getlink.execute(itemindex);
-					getdesc.execute(url);
+					getdesc.execute(url);*/
 					drawer.closeDrawer(drawerlst);
 			    }});
 		
@@ -232,7 +209,6 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 	@Override
 	public void resultTitle(List<String> listTitle, List<Bitmap> listImg) {
 		
-		drawerlst.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_list_view,listTitle));
 		
 	}
 
@@ -243,9 +219,9 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 	public void resultLink(String url, String desc) {
 		this.url = url;
 		  // Toast.makeText(this, getSupportFragmentManager().findFragmentById(R.id.content_frame).toString(), Toast.LENGTH_LONG).show();
-if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== allnews){
+if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== dunya){
 		//Toast.makeText(this, url, Toast.LENGTH_LONG).show();
-        ((TextView) allnews.getView().findViewById(R.id.textView1)).setText(desc);  
+        ((TextView) dunya.getView().findViewById(R.id.textView1)).setText(desc);  
 		//strRes.setText(desc);
 }
 
@@ -256,9 +232,9 @@ if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== allnews){
 
 	@Override
 	public void resultDesc(String str, Bitmap image) {
-		if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== allnews){
+		if(getSupportFragmentManager().findFragmentById(R.id.content_frame)== dunya){
 
-	        ((ImageView) allnews.getView().findViewById(R.id.imageView1)).setImageBitmap(image);
+	        ((ImageView) dunya.getView().findViewById(R.id.imageView1)).setImageBitmap(image);
 			}
 		
 	}

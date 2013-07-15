@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 
 
-public class liveViewFragment extends Fragment {
+public class geoNewsFragment extends Fragment {
 
  @Override
  public View onCreateView(LayoutInflater inflater, ViewGroup container,
    Bundle savedInstanceState) {
-  View myFragmentView = inflater.inflate(R.layout.liveviewfragment, container, false);
+  View myFragmentView = inflater.inflate(R.layout.geonewsfragment, container, false);
   return myFragmentView;
  }
 
