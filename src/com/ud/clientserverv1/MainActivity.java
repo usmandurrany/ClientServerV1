@@ -8,7 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.app.ActionBar.Tab;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,7 +58,9 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
     ImageView newshead;
     String imgSrc;
     Bitmap bitmap;
-    allNewsFragment allnews;
+    allNewsFragment allnews = new allNewsFragment();
+    liveViewFragment liveview = new liveViewFragment();
+
     getNews getnews = new getNews(this);
 	getNews.getTitle gettitle = getnews.new getTitle();
 	getNews.getLink getlink = getnews.new getLink();
@@ -72,7 +76,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
 		newshead =  (ImageView) findViewById(R.id.imageView1);
 		
-		gettitle.delegate=this;
+	gettitle.delegate=this;
 		getlink.delegate=this;
 		getdesc.delegate=this;
 		
@@ -86,9 +90,53 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 
 	    // Specify that tabs should be displayed in the action bar.
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    actionBar.addTab(
+                actionBar.newTab()
+                        .setText("All News")
+                        .setTabListener(new ActionBar.TabListener() {
+							
+							@Override
+							public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+								// TODO Auto-generated method stub
+								
+							}
+							
+							@Override
+							public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
+								getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left,0).replace(R.id.content_frame,allnews).commit();
+							}
+							
+							@Override
+							public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+								// TODO Auto-generated method stub
+								
+							}
+						}));
+	    actionBar.addTab(actionBar.newTab().setText("Live View").setTabListener(new ActionBar.TabListener() {
+			
+			@Override
+			public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
+				getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_right,0).replace(R.id.content_frame,liveview).commit();
+				
+
+
+				
+			}
+			
+			@Override
+			public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+		}));
 
 	    
-	allnews = new allNewsFragment();
 	   getSupportFragmentManager().beginTransaction()
         .replace(R.id.content_frame, allnews).commit();
 
