@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
     
-
-    <RelativeLayout 
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
           
-
-        
+<android.support.v4.view.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+   
+    </android.support.v4.view.ViewPager>
     
     <ListView
         android:id="@+id/left_drawer"
