@@ -137,8 +137,8 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 	   //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, dunya).commit();
 
 		
-		//AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
-		//aua.checkUpdates(true);
+		AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
+		aua.checkUpdates(true);
 		@SuppressWarnings("unused")
 		GCM gcmClass = new GCM(this);
 		

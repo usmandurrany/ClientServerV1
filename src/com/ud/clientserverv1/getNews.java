@@ -12,8 +12,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,6 +27,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class getNews
 {
@@ -42,7 +47,7 @@ String title;
 //int itemindex = 0;
 DrawerLayout drawer;
 ProgressDialog pDialog;
-
+Builder ab;
 Uri uri;
 Document doc;
 Elements link;
@@ -74,6 +79,9 @@ class getTitle extends AsyncTask<String, Void, String>
 			pDialog.setIndeterminate(true);
 			pDialog.setCancelable(false);			
 		    pDialog.show();
+		   
+		    
+		    
 		}
 
 		@Override
@@ -84,7 +92,8 @@ class getTitle extends AsyncTask<String, Void, String>
 				Log.e("Malformed URL",newsRSS1);
 			} catch (IOException e) {
 				Log.e("IO Exception",e.toString());
-
+				pDialog.dismiss();
+				this.cancel(true);
 			}
 			return null;
 			

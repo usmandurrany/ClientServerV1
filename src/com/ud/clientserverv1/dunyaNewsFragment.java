@@ -3,10 +3,15 @@ package com.ud.clientserverv1;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ud.clientserverv1.NewsListAdapter.ViewHolder;
-
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -50,9 +55,24 @@ getNews.getLink getlink;
 		gettitle.delegate=this;
 
 		getdesc.delegate=this;
-		
+		if(isNetworkConnected())
 		gettitle.execute();
-		
+		else{
+			//Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
+			Builder ab = new AlertDialog.Builder(getActivity());
+			ab.setTitle("Network error");
+			ab.setMessage("Cant connect to server");
+			ab.setPositiveButton("Close", new OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					getActivity().finish();
+					
+				}
+				
+			});
+			ab.show();
+		}
 		
 		
 		//getlink.execute(0);
@@ -65,6 +85,9 @@ getNews.getLink getlink;
 public void resultTitle(List<String> listTitle, List<Bitmap> listImg) {
 	icon = BitmapFactory.decodeResource(getActivity().getResources(),
 	        R.drawable.nonews_s);
+	if(listTitle.size()==0 && listImg.size() ==0)
+		Toast.makeText(getActivity(), "Network communication problem !", Toast.LENGTH_LONG).show();
+
     for (int i = 0; i < listTitle.size(); i++) {
         newsItem item = new newsItem(listImg.get(i), listTitle.get(i).toString());
         newsItems.add(item);
@@ -114,5 +137,10 @@ private void addListenerOnButton() {
 @Override
 public void newsDet(Bitmap image, String desc) {
 ((MainActivity) getActivity()).detFragmentValue(image, desc);
+}
+public boolean isNetworkConnected() {
+    final ConnectivityManager conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+    final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+    return activeNetwork != null && activeNetwork.getState() == NetworkInfo.State.CONNECTED;
 }
 }
