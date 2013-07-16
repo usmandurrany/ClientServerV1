@@ -22,9 +22,9 @@ public class NewsListAdapter extends ArrayAdapter<newsItem> {
     }
  
     /*private view holder class*/
-    private class ViewHolder {
-        ImageView imageView;
-        TextView txtTitle;
+    public class ViewHolder {
+        public ImageView imageView;
+        public TextView txtTitle;
     }
  
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -47,4 +47,5 @@ public class NewsListAdapter extends ArrayAdapter<newsItem> {
  
         return convertView;
     }
+   
 }

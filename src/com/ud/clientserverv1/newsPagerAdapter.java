@@ -1,37 +1,34 @@
 package com.ud.clientserverv1;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
-public class newsPagerAdapter extends FragmentPagerAdapter {
+public class newsPagerAdapter extends FragmentStatePagerAdapter {
 
-        public newsPagerAdapter(FragmentManager fm) {
+	List<Fragment> mListViews = new ArrayList<Fragment>();
+	
+	public newsPagerAdapter(FragmentManager fm) {
             super(fm);
+            mListViews.add(new dunyaNewsFragment());
+            mListViews.add(new geoNewsFragment());
         }
 
         @Override
         public Fragment getItem(int i) {
-            switch (i) {
-                case 0:
-                    // The first section of the app is the most interesting -- it offers
-                    // a launchpad into the other demonstrations in this example application.
-                    return new dunyaNewsFragment();
-                  
-                case 1:
-                	return new geoNewsFragment();
-
-                default:
-                    // The other sections of the app are dummy placeholders.
-
-                    return new dunyaNewsFragment();
+          
+                    return mListViews.get(i);
             }
-        }
+        
+
 
         @Override
         public int getCount() {
-            return 2;
+            return mListViews.size();
         }
 
         @Override
@@ -45,4 +42,16 @@ public class newsPagerAdapter extends FragmentPagerAdapter {
         	return null;
         	}
         }
-    }
+   public void addPage(Fragment frag, int pos) {
+                mListViews.add(pos,frag);
+                notifyDataSetChanged();
+         
+        }
+
+    public void removePage(int position) {
+          mListViews.remove(position);
+
+          notifyDataSetChanged();
+            }
+        }
+    

@@ -3,8 +3,8 @@ package com.ud.clientserverv1;
 import android.graphics.Bitmap;
 
 public class newsItem {
-    private Bitmap imageId;
-    private String title;
+    public Bitmap imageId;
+    public String title;
 
  
     public newsItem(Bitmap imageId, String title) {

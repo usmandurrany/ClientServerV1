@@ -1,0 +1,29 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+    
+	<ImageView
+	    android:id="@+id/newsImgBig"
+	    android:layout_width="150dp"
+	    android:layout_height="90dp"
+	    android:paddingRight="15dp"
+	    android:paddingLeft="15dp"
+	    android:paddingTop="15dp"
+	    android:layout_centerHorizontal="true"/>
+
+	<TextView
+	    android:id="@+id/newsDesc"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/newsImgBig"
+	    android:gravity="center_horizontal"
+	    android:textSize="16sp"
+	    android:padding="15dp" />
+
+	</RelativeLayout>
+	</ScrollView>

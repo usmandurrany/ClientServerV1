@@ -23,7 +23,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class getNews
 {
@@ -157,18 +156,19 @@ class getTitle extends AsyncTask<String, Void, String>
 		}
 	}
 	
-class getLink extends AsyncTask<Integer,Void,Integer>
+class getLink extends AsyncTask<String,Void,String>
 	{
-		public IAsyncResult delegate;
+		public INewsDetail delegate;
 
 
 		@Override
-		protected Integer doInBackground(Integer... arg0)
+		protected String doInBackground(String... arg0)
 		{
-
 			try {
-				doc = Jsoup.parse(new URL(newsRSS1), 1000);
-								
+				String rawurl = "http://m.dunyanews.tv/caller.php?q=hd&n="+arg0[0];
+			    String url = rawurl.replaceAll(" ", "%20");
+				doc = Jsoup.parse(new URL(url), 4000);
+				Log.e("URL",url);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -178,13 +178,37 @@ class getLink extends AsyncTask<Integer,Void,Integer>
 			
 		}
 		@Override
-		protected void onPostExecute(Integer itemindex)
+		protected void onPostExecute(String string)
 		{
-			link = doc.select("item > link");
-			desc = doc.select("item > description");
-			url = link.get(itemindex).nextSibling().toString();
-			description = desc.get(itemindex).text();
-		    delegate.resultLink(url, description);
+			Elements imgLink = doc.select("div.news-panel > p > img[src]");
+			imgSrc = imgLink.attr("src");
+			desc = doc.select("div.news-panel > p");
+			 new AsyncTask<String,Void,String>()
+			 {
+
+				@Override
+				protected String doInBackground(String... arg0) {
+					try {
+						bitmap = BitmapFactory.decodeStream((InputStream)new URL(imgSrc).getContent());
+						Log.e("URL",imgSrc);
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return null;
+				}
+				@Override
+				protected void onPostExecute(String string)
+				{
+				    delegate.newsDet(bitmap, desc.text());
+
+				}
+				 
+			 }.execute(imgSrc);
+			
 		    //Toast.makeText(context, link.get(itemindex).nextSibling().toString(),Toast.LENGTH_LONG).show();
 		   // gdesc.execute();
 //		    pDialog.dismiss();

@@ -19,11 +19,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class MainActivity extends FragmentActivity implements IAsyncResult {
+public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 	ListView drawerlst;
     String title;
@@ -33,6 +34,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
     ActionBarDrawerToggle mDrawerToggle;
     dunyaNewsFragment dunya = new dunyaNewsFragment();
     geoNewsFragment geo = new geoNewsFragment();
+    newsDetailFragment newsDetail = new newsDetailFragment();
 
     getNews getnews = new getNews(this);
 	getNews.getTitle gettitle = getnews.new getTitle();
@@ -69,8 +71,12 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 				
 			}
  	     };
+ 		mNewsPagerAdapter = new newsPagerAdapter(getSupportFragmentManager());
 
-		mNewsPagerAdapter = new newsPagerAdapter(getSupportFragmentManager());
+ 	     
+ 	   //  mNewsPagerAdapter.addPage(dunya);
+ 	    //mNewsPagerAdapter.addPage(geo);
+ 	   
 		mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mNewsPagerAdapter);
  	   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -87,7 +93,17 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
                // When swiping between different app sections, select the corresponding tab.
                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
                // Tab.
-              actionBar.setSelectedNavigationItem(position);
+			//      getSupportFragmentManager().beginTransaction().remove(newsDetail).commit();
+    		   if(position == 2){
+    			   if(mNewsPagerAdapter.getCount() == 3)
+
+    			   mNewsPagerAdapter.removePage(2);
+    			   
+    		   }
+    		   		   
+    			   
+    		   
+              //actionBar.setSelectedNavigationItem(position);
            }   
     	   
     	   
@@ -99,7 +115,7 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
  	     
 		
 		gettitle.delegate=this;
-		getlink.delegate=this;
+		//getlink.delegate=this;
 		getdesc.delegate=this;
 		
 //		gettitle.execute();
@@ -195,14 +211,11 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 			    {
 			      title = (drawerlst.getItemAtPosition(position).toString());
 			      itemindex = position;
-			/*		//Toast.makeText(getBaseContext(), , Toast.LENGTH_LONG).show();
-			  	getlink = getnews.new getLink();
-				getdesc = getnews.new getDesc();
-				getlink.delegate=MainActivity.this;
-				getdesc.delegate=MainActivity.this;
-			      getlink.execute(itemindex);
-					getdesc.execute(url);*/
-					drawer.closeDrawer(drawerlst);
+			   //mViewPager.setCurrentItem(3);
+			      //   getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0).replace(R.id.pager,newsDetail).commit();
+			 
+			 	//mViewPager.setCurrentItem(2);
+			   drawer.closeDrawer(drawerlst);
 			    }});
 		
 		
@@ -237,6 +250,19 @@ public class MainActivity extends FragmentActivity implements IAsyncResult {
 
 	      //  ((ImageView) dunya.getView().findViewById(R.id.imageView1)).setImageBitmap(image);
 			}
+
+
+
+
+	public void detFragmentValue(Bitmap image, String desc) {
+		mNewsPagerAdapter.addPage(newsDetail,2);
+	 	mViewPager.setCurrentItem(2);
+	     ((ImageView) newsDetail.getView().findViewById(R.id.newsImgBig)).setImageBitmap(image);
+	     ((TextView) newsDetail.getView().findViewById(R.id.newsDesc)).setText(desc);
+
+	     
+		
+	}
 
 	
 
