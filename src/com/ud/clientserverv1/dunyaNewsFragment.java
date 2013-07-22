@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -24,39 +23,78 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.ud.clientserverv1.PullToRefreshListView.OnRefreshListener;
+
 
 
 
 public class dunyaNewsFragment extends Fragment implements IAsyncResult, INewsDetail{
 
 String url;
-ListView listView;
+PullToRefreshListView listView;
 List<newsItem> newsItems;
 Bitmap icon ;
-
+newsListAdapter adapter;
+newsItem item;
 getNews getnews ;
-getNews.getDesc getdesc;
-getNews.getTitle gettitle ;
-getNews.getLink getlink;
-
+List<String> listTitle;
+List<String> listImg;
+ImageLoaderConfiguration config;
+DisplayImageOptions options;
+ImageLoader imageLoader;
+FadeInBitmapDisplayer fadeIn;
+getDesc getdesc;
  @Override
  public View onCreateView(LayoutInflater inflater, ViewGroup container,
    Bundle savedInstanceState) {
-  View myFragmentView = inflater.inflate(R.layout.dunyanewsfragment, container, false);
-  listView = (ListView) myFragmentView.findViewById(R.id.news);
+	 
+  View dunyaNewsFragment = inflater.inflate(R.layout.dunyanewsfragment, container, false);
+   listView = (PullToRefreshListView ) dunyaNewsFragment.findViewById(R.id.news);
 
    getnews = new getNews(getActivity());
-  getdesc = getnews.new getDesc();
-  gettitle = getnews.new getTitle();
-  getlink = getnews.new getLink();
-
-		newsItems = new ArrayList<newsItem>();
-		getlink.delegate=this;
-		gettitle.delegate=this;
-
+   getdesc = new getDesc(getActivity());
+   newsItems = new ArrayList<newsItem>();
+   
+		getnews.delegate=this;
 		getdesc.delegate=this;
-		if(isNetworkConnected())
-		gettitle.execute();
+		
+	       fadeIn = new FadeInBitmapDisplayer(500);
+	       
+	       	if(imageLoader == null)
+			{
+	        options = new DisplayImageOptions.Builder()
+	        .showStubImage(R.drawable.nonews_s)
+	        .delayBeforeLoading(200)
+	        .cacheInMemory(true) // default
+	        .displayer(fadeIn)
+	 
+	        .build();
+	        config = new ImageLoaderConfiguration.Builder(getActivity()).defaultDisplayImageOptions(options).threadPoolSize(5).build();
+	        this.imageLoader = ImageLoader.getInstance();
+	        this.imageLoader.init(config);
+			}
+	        PauseOnScrollListener POSlistener = new PauseOnScrollListener(imageLoader, true, false);
+	        listView.setOnScrollListener(POSlistener);
+	        listView.setOnRefreshListener(new OnRefreshListener(){
+
+				@Override
+				public void onRefresh() {
+					getnews = new getNews(getActivity());
+					getnews.delegate = dunyaNewsFragment.this;
+					getnews.execute();
+				}
+	        	
+	        	
+	        });
+		if(isNetworkConnected()){
+		getnews.execute();
+		 
+		}
 		else{
 			//Toast.makeText(getActivity(), "Network error", Toast.LENGTH_LONG).show();
 			Builder ab = new AlertDialog.Builder(getActivity());
@@ -74,28 +112,19 @@ getNews.getLink getlink;
 			ab.show();
 		}
 		
-		
-		//getlink.execute(0);
-		//getdesc.execute(url);
+
 		addListenerOnButton();
-  return myFragmentView;
+  return dunyaNewsFragment;
  }
 
 @Override
-public void resultTitle(List<String> listTitle, List<Bitmap> listImg) {
-	icon = BitmapFactory.decodeResource(getActivity().getResources(),
-	        R.drawable.nonews_s);
-	if(listTitle.size()==0 && listImg.size() ==0)
-		Toast.makeText(getActivity(), "Network communication problem !", Toast.LENGTH_LONG).show();
+public void resultTitle(String[] listTitle, String[] listImg) {
+    adapter=new newsListAdapter(getActivity(), listTitle, listImg ,imageLoader);
+	    listView.setAdapter(adapter);
+adapter.notifyDataSetChanged();
+listView.onRefreshComplete();
 
-    for (int i = 0; i < listTitle.size(); i++) {
-        newsItem item = new newsItem(listImg.get(i), listTitle.get(i).toString());
-        newsItems.add(item);
-    }
-	//((ListView) this.getView().findViewById(R.id.news)).setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.news_list_view,listTitle));
-   // listView = (ListView) findViewById(R.id.news);
-    NewsListAdapter adapter = new NewsListAdapter(getActivity(),R.layout.news_list_view, newsItems);
-    listView.setAdapter(adapter);
+
 }
 
 @Override
@@ -118,17 +147,13 @@ private void addListenerOnButton() {
 	listView.setOnItemClickListener(new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 		    {
-		    //  title = (drawerlst.getItemAtPosition(position).toString());
-		    int itemindex = position;
-		    newsItem holder = (newsItem) (listView.getItemAtPosition(position));
-		    Toast.makeText(getActivity(), holder.title, Toast.LENGTH_LONG).show();
-
-		    getlink.execute(holder.title);
+		  
+		    Toast.makeText(getActivity(), adapter.getItem(position) , Toast.LENGTH_LONG).show();
+		    getdesc = new getDesc(getActivity());
+		    getdesc.delegate=dunyaNewsFragment.this;
+		   getdesc.execute(adapter.getItem(position));
 		    
-		   //mViewPager.setCurrentItem(3);
-		      //   getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0).replace(R.id.pager,newsDetail).commit();
-		    
-		 	
+	
 		    }});
 	
 	
@@ -136,11 +161,30 @@ private void addListenerOnButton() {
 
 @Override
 public void newsDet(Bitmap image, String desc) {
+	
 ((MainActivity) getActivity()).detFragmentValue(image, desc);
 }
 public boolean isNetworkConnected() {
     final ConnectivityManager conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
     return activeNetwork != null && activeNetwork.getState() == NetworkInfo.State.CONNECTED;
+}
+
+@Override
+public void resultHeadlines(List<String> listTitle) {
+	for (int i = 0; i < listTitle.size(); i++) {
+        newsItem item = new newsItem(listTitle.get(i).toString());
+        newsItems.add(item);
+    }	
+    listView.setAdapter(adapter);
+}
+
+@Override
+public void resultHeadImg(List<Bitmap> listImg) {
+	for (int i = 0; i < listImg.size(); i++) {
+        item = new newsItem(listImg.get(i));
+        newsItems.add(item);
+        
+    }	
 }
 }

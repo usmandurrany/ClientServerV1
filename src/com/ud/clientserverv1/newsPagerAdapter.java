@@ -6,7 +6,6 @@ import java.util.List;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
 
 public class newsPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -15,7 +14,7 @@ public class newsPagerAdapter extends FragmentStatePagerAdapter {
 	public newsPagerAdapter(FragmentManager fm) {
             super(fm);
             mListViews.add(new dunyaNewsFragment());
-            mListViews.add(new geoNewsFragment());
+          //  mListViews.add(new geoNewsFragment());
         }
 
         @Override

@@ -11,6 +11,12 @@ public class newsItem {
         this.imageId = imageId;
         this.title = title;
     }
+    public newsItem(String title) {
+        this.title = title;
+    }
+    public newsItem(Bitmap imageId) {
+        this.imageId = imageId;
+    }
     public Bitmap getImageId() {
         return imageId;
     }

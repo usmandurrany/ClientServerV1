@@ -1,29 +1,42 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+ android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="#e5e5e5">
+     
+<FrameLayout 
+android:layout_width="match_parent"
+android:layout_height="?android:attr/listPreferredItemHeight">
 
 <RelativeLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fff">
+    android:layout_margin="8dp"
+    android:background="@drawable/card_background">    
     
-	<ImageView
-	    android:id="@+id/newsImgBig"
-	    android:layout_width="150dp"
-	    android:layout_height="90dp"
-	    android:paddingRight="15dp"
-	    android:paddingLeft="15dp"
-	    android:paddingTop="15dp"
-	    android:layout_centerHorizontal="true"/>
+	
 
-	<TextView
+	<com.pagesuite.flowtext.FlowTextView
 	    android:id="@+id/newsDesc"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/newsImgBig"
-	    android:gravity="center_horizontal"
 	    android:textSize="16sp"
-	    android:padding="15dp" />
+	    android:paddingTop="15dp"
+	    android:paddingBottom ="15dp"
+	    android:layout_marginBottom="8dp"
+	    android:paddingLeft="8dp"
+	    android:paddingRight="8dp" >
+	
+	    <ImageView
+	    android:id="@+id/newsImgBig"
+	    android:layout_width="150dp"
+	    android:layout_height="90dp"
+	    android:paddingRight="8dp"
+	    android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"/>
+	    
+	    </com.pagesuite.flowtext.FlowTextView>
 
 	</RelativeLayout>
+	</FrameLayout>
 	</ScrollView>

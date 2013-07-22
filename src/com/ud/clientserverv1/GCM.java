@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -17,13 +16,11 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -209,10 +206,10 @@ public class GCM
 	            return msg;
 			}
 			
-	        protected void onPostExecute(String msg) {
+	        /*protected void onPostExecute(String msg) {
 		           // Toast.makeText(this, msg + "\n", Toast.LENGTH_LONG).show();
 		        	Log.v("Message:  ",msg);
-		        }
+		        }*/
 
 			
 	    }.execute(null, null, null);

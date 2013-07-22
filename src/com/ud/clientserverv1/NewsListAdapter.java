@@ -1,51 +1,61 @@
 package com.ud.clientserverv1;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
-public class NewsListAdapter extends ArrayAdapter<newsItem> {
- 
-    Context context;
- 
-    public NewsListAdapter(Context context, int resourceId,
-            List<newsItem> items) {
-        super(context, resourceId, items);
-        this.context = context;
+public class newsListAdapter extends BaseAdapter {
+    
+    private Activity activity;
+    private String[] titles;
+    private String[] imgUrls;
+    private static LayoutInflater inflater=null;
+    ImageLoaderConfiguration config;
+    DisplayImageOptions options;
+    ImageLoader imageLoader;
+    FadeInBitmapDisplayer fadeIn;
+
+    public newsListAdapter(Activity a, String[] titles, String[] imgUrls,ImageLoader imageLoader) {
+        activity = a;
+        this.titles = titles;
+        this.imgUrls = imgUrls;
+        this.imageLoader = imageLoader;
+        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        
     }
- 
-    /*private view holder class*/
-    public class ViewHolder {
-        public ImageView imageView;
-        public TextView txtTitle;
+
+    public int getCount() {
+        return titles.length;
     }
- 
+
+    public String getItem(int position) {
+        return titles[position];
+    }
+
+    public long getItemId(int position) {
+        return position;
+    }
+        
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        newsItem newsItem = getItem(position);
- 
-        LayoutInflater mInflater = (LayoutInflater) context
-                .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.news_list_view, null);
-            holder = new ViewHolder();
-            holder.txtTitle = (TextView) convertView.findViewById(R.id.textView1);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.imageView1);
-            convertView.setTag(holder);
-        } else
-            holder = (ViewHolder) convertView.getTag();
- 
-        holder.txtTitle.setText(newsItem.getTitle());
-        holder.imageView.setImageBitmap(newsItem.getImageId());
- 
-        return convertView;
+        View vi=convertView;
+        if(convertView==null)
+            vi = inflater.inflate(R.layout.news_list_view, null);
+
+        TextView text=(TextView)vi.findViewById(R.id.textView1);;
+        ImageView image=(ImageView)vi.findViewById(R.id.imageView1);
+        text.setText(titles[position]);
+        
+        imageLoader.displayImage(imgUrls[position], image);
+        return vi;
     }
-   
 }

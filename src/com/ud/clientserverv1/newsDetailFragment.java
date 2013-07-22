@@ -10,9 +10,10 @@ public class newsDetailFragment extends Fragment
 {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			   Bundle savedInstanceState) {
-			  View myFragmentView = inflater.inflate(R.layout.newsdetailfragment, container, false);
+			  View newsDetialFragment = inflater.inflate(R.layout.newsdetailfragment, container, false);
 
-			  return myFragmentView;
+			  return newsDetialFragment;
 			 }
+
 	
 	}

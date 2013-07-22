@@ -23,62 +23,65 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.pagesuite.flowtext.FlowTextView;
+
 
 public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 	ListView drawerlst;
     String title;
-    int itemindex = 0;
     DrawerLayout drawer;
-    String url;
+    
     ActionBarDrawerToggle mDrawerToggle;
+    
     dunyaNewsFragment dunya = new dunyaNewsFragment();
-    geoNewsFragment geo = new geoNewsFragment();
+    //geoNewsFragment geo = new geoNewsFragment(); //Unimplemented
+    
     newsDetailFragment newsDetail = new newsDetailFragment();
 
     getNews getnews = new getNews(this);
-	getNews.getTitle gettitle = getnews.new getTitle();
-	getNews.getLink getlink = getnews.new getLink();
-	getNews.getDesc getdesc = getnews.new getDesc();
+
 	
 	newsPagerAdapter mNewsPagerAdapter;
 	ViewPager mViewPager;
+	
 
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
+		//aua.checkUpdates(true);
 		
 		setContentView(R.layout.activity_main);
 		drawerlst = (ListView) findViewById(R.id.left_drawer);
 		drawer =  (DrawerLayout) findViewById(R.id.drawer_layout);
 		
+ 		mNewsPagerAdapter = new newsPagerAdapter(getSupportFragmentManager());
+ 		mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mNewsPagerAdapter);
+ 		
 	    final ActionBar actionBar = getActionBar();
 	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 
 			@Override
 			public void onTabReselected(Tab arg0, FragmentTransaction arg1) {
-				// TODO Auto-generated method stub
-				
+				//mViewPager.setAdapter(null);
+			//	mViewPager.setAdapter(mNewsPagerAdapter);
 			}
 
 			@Override
 			public void onTabSelected(Tab arg0, FragmentTransaction arg1) {
 				mViewPager.setCurrentItem(arg0.getPosition());
+				//arg0.setText("Refresh News");
 			}
 
 			@Override
 			public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
-				// TODO Auto-generated method stub
-				
+
+				//arg0.setText(mNewsPagerAdapter.getPageTitle(arg0.getPosition()));
 			}
  	     };
- 		mNewsPagerAdapter = new newsPagerAdapter(getSupportFragmentManager());
 
- 	     
- 	   //  mNewsPagerAdapter.addPage(dunya);
- 	    //mNewsPagerAdapter.addPage(geo);
- 	   
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mNewsPagerAdapter);
+		
  	   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
  	   for(int i = 0;i<mNewsPagerAdapter.getCount();i++)
  		  actionBar.addTab(
@@ -94,16 +97,16 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
                // Tab.
 			//      getSupportFragmentManager().beginTransaction().remove(newsDetail).commit();
-    		   if(position == 2){
-    			   if(mNewsPagerAdapter.getCount() == 3)
+    		   if(position == 1){
+    			   if(mNewsPagerAdapter.getCount() == 2)
+    			   mNewsPagerAdapter.removePage(1);
+    			   
+    	       //   actionBar.setSelectedNavigationItem(0);
 
-    			   mNewsPagerAdapter.removePage(2);
     			   
     		   }
-    		   		   
-    			   
-    		   
-              //actionBar.setSelectedNavigationItem(position);
+    		  // else    		   
+             // actionBar.setSelectedNavigationItem(position);
            }   
     	   
     	   
@@ -112,13 +115,8 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
        
        mViewPager.setOnPageChangeListener(pageChangeListener);
 
- 	     
+
 		
-		gettitle.delegate=this;
-		//getlink.delegate=this;
-		getdesc.delegate=this;
-		
-//		gettitle.execute();
 		List<String> listCategories = new ArrayList<String>(7);
 		listCategories.add("Headlines");
 		listCategories.add("Pakistan");
@@ -130,22 +128,11 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 
 		
-
-	    // Specify that tabs should be displayed in the action bar.
-	    
-	    
-	   //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, dunya).commit();
-
-		
-		AutoUpdateApk aua = new AutoUpdateApk(getApplicationContext());
-		aua.checkUpdates(true);
 		@SuppressWarnings("unused")
 		GCM gcmClass = new GCM(this);
 		
 		addListenerOnButton();
 
-		//gtitle.execute();
-		
 		
 		
         mDrawerToggle = new ActionBarDrawerToggle(this, drawer,
@@ -210,7 +197,6 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 			    {
 			      title = (drawerlst.getItemAtPosition(position).toString());
-			      itemindex = position;
 			   //mViewPager.setCurrentItem(3);
 			      //   getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0).replace(R.id.pager,newsDetail).commit();
 			 
@@ -224,18 +210,12 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 
 
-	@Override
-	public void resultTitle(List<String> listTitle, List<Bitmap> listImg) {
-		
-		
-	}
 
 
 
 
 	@Override
 	public void resultLink(String url, String desc) {
-		this.url = url;
 
         ((TextView) dunya.getView().findViewById(R.id.textView1)).setText(desc);  
 
@@ -255,17 +235,54 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 
 	public void detFragmentValue(Bitmap image, String desc) {
-		mNewsPagerAdapter.addPage(newsDetail,2);
+		mNewsPagerAdapter.addPage(newsDetail,1);
 	 	mViewPager.setCurrentItem(2);
 	     ((ImageView) newsDetail.getView().findViewById(R.id.newsImgBig)).setImageBitmap(image);
-	     ((TextView) newsDetail.getView().findViewById(R.id.newsDesc)).setText(desc);
+	     ((FlowTextView) newsDetail.getView().findViewById(R.id.newsDesc)).setText(desc);
+	     ((FlowTextView) newsDetail.getView().findViewById(R.id.newsDesc)).invalidate();
+
+
 
 	     
 		
 	}
 
-	
 
+
+
+	@Override
+	public void resultHeadlines(List<String> listTitle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void resultHeadImg(List<Bitmap> listImg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void resultTitle(String[] listTitle, String[] listImg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+@Override
+public void onBackPressed(){
+	if(mViewPager.getCurrentItem()== 1)
+		mViewPager.setCurrentItem(0);
+	else if(mViewPager.getCurrentItem()==0)
+		finish();
+	
+}
 
 	
 
