@@ -6,33 +6,32 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.pagesuite.flowtext.FlowTextView;
 
 public class newsDetailFragment extends Fragment implements View.OnTouchListener
 {
     final static int STEP = 200;
-    FlowTextView mtxtRatio1,mtxtRatio2,mtxtRatio3,mtxtRatio4;
+    FlowTextView mtxtRatio1;
     //float mRatio = 1.0f;
     int mRatio = 1;
     int mBaseDist;
     int mBaseRatio;
-    float fontsize = 13;
+    //float fontsize = 13;
 
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			   Bundle savedInstanceState) {
 			  View newsDetialFragment = inflater.inflate(R.layout.newsdetailfragment, container, false);
 
             mtxtRatio1 = (FlowTextView)newsDetialFragment.findViewById(R.id.newsDesc);
-            mtxtRatio1.setTextSize(mRatio+13);
+        mtxtRatio1.setOnTouchListener(this);
+        mtxtRatio1.setTextSize(mRatio + 13);
+        return newsDetialFragment;
+    }
 
-			  return newsDetialFragment;
-			 }
 
-
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event) {
         if (event.getPointerCount() == 2) {
             int action = event.getAction();
             int pureaction = action & MotionEvent.ACTION_MASK;
@@ -54,11 +53,6 @@ public class newsDetailFragment extends Fragment implements View.OnTouchListener
         int dx = (int)(event.getX(0) - event.getX(1));
         int dy = (int)(event.getY(0) - event.getY(1));
         return (int)(Math.sqrt(dx * dx + dy * dy));
-    }
-
-    public boolean onTouch(View v, MotionEvent event) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
 
