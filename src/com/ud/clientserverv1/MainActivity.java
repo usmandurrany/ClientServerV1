@@ -97,9 +97,9 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
                // Tab.
 			//      getSupportFragmentManager().beginTransaction().remove(newsDetail).commit();
-    		   if(position == 1){
-    			   if(mNewsPagerAdapter.getCount() == 2)
-    			   mNewsPagerAdapter.removePage(1);
+    		   if(position == 2){
+    			   if(mNewsPagerAdapter.getCount() == 3)
+    			   mNewsPagerAdapter.removePage(2);
     			   
     	       //   actionBar.setSelectedNavigationItem(0);
 
@@ -235,8 +235,8 @@ public class MainActivity extends FragmentActivity implements IAsyncResult{
 
 
 	public void detFragmentValue(Bitmap image, String desc) {
-		mNewsPagerAdapter.addPage(newsDetail,1);
-	 	mViewPager.setCurrentItem(2);
+		mNewsPagerAdapter.addPage(newsDetail,2);
+	 	mViewPager.setCurrentItem(3);
 	     ((ImageView) newsDetail.getView().findViewById(R.id.newsImgBig)).setImageBitmap(image);
 	     ((FlowTextView) newsDetail.getView().findViewById(R.id.newsDesc)).setText(desc);
 	     ((FlowTextView) newsDetail.getView().findViewById(R.id.newsDesc)).invalidate();

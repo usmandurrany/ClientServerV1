@@ -16,9 +16,9 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class newsListAdapter extends BaseAdapter {
     
     private Activity activity;
-    private String[] titles;
-    private String[] imgUrls;
-    private static LayoutInflater inflater=null;
+    protected String[] titles;
+    protected String[] imgUrls;
+    protected static LayoutInflater inflater=null;
     ImageLoaderConfiguration config;
     DisplayImageOptions options;
     ImageLoader imageLoader;

@@ -44,7 +44,7 @@ Document doc;
 Elements link;
 Elements desc;
 String description;
-String newsRSS1= "http://m.dunyanews.tv/caller.php?q=hd&n=0";
+public String newsRSS1= "http://m.dunyanews.tv/caller.php?q=hd&n=0";
 String url;
 ImageView newshead;
 String imgSrc;
@@ -89,6 +89,7 @@ List<String> listTitle;
 			
 		}
 		
+		
 		protected void onPostExecute(String result)
 		{
 			
@@ -124,9 +125,7 @@ List<String> listTitle;
 
 		      
 			     // glink.execute(0);
-			     
-			      
-			      
+			   	      
 		}
 	}
 

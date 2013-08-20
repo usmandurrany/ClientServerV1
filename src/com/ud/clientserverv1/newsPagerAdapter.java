@@ -14,7 +14,7 @@ public class newsPagerAdapter extends FragmentStatePagerAdapter {
 	public newsPagerAdapter(FragmentManager fm) {
             super(fm);
             mListViews.add(new dunyaNewsFragment());
-          //  mListViews.add(new geoNewsFragment());
+            mListViews.add(new geoNewsFragment());
         }
 
         @Override
