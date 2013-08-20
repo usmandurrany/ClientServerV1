@@ -161,7 +161,9 @@ private void addListenerOnButton() {
 
 @Override
 public void newsDet(Bitmap image, String desc) {
-	
+
+    //Toast.makeText(getActivity(),desc, Toast.LENGTH_LONG).show();
+
 ((MainActivity) getActivity()).detFragmentValue(image, desc);
 }
 public boolean isNetworkConnected() {

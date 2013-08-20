@@ -43,7 +43,7 @@ Document doc;
 Elements link;
 Elements desc;
 String description;
-protected String newsRSS1= "http://m.dunyanews.tv/caller.php?q=hd&n=0";
+protected String newsRSS1= "http://m.dunyanews.tv/caller.php?q=hd&n=";
 String url;
 ImageView newshead;
 String imgSrc;
@@ -78,9 +78,9 @@ List<String> listTitle;
 		{
 		try {
 		//String rawurl = "http://m.dunyanews.tv/caller.php?q=hd&n="+arg0[0];
-		//String url = rawurl.replaceAll(" ", "%20");
-		doc = Jsoup.parse(new URL(newsRSS1+arg0[0]), 4000);
-		//Log.e("URL",url);
+		String url = arg0[0].replaceAll(" ", "%20");
+		doc = Jsoup.parse(new URL(newsRSS1+url), 4000);
+		Log.e("URL",url);
 		} catch (MalformedURLException e) {
 		e.printStackTrace();
 		} catch (IOException e) {
