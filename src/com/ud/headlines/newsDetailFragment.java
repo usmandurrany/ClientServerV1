@@ -1,4 +1,4 @@
-package com.ud.clientserverv1;
+package com.ud.headlines;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 
 import com.pagesuite.flowtext.FlowTextView;
 
-public class newsDetailFragment extends Fragment implements View.OnTouchListener
-{
+public class newsDetailFragment extends Fragment implements View.OnTouchListener {
     final static int STEP = 200;
     FlowTextView mtxtRatio1;
     //float mRatio = 1.0f;
@@ -21,10 +20,10 @@ public class newsDetailFragment extends Fragment implements View.OnTouchListener
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			   Bundle savedInstanceState) {
-			  View newsDetialFragment = inflater.inflate(R.layout.newsdetailfragment, container, false);
+                             Bundle savedInstanceState) {
+        View newsDetialFragment = inflater.inflate(R.layout.newsdetailfragment, container, false);
 
-            mtxtRatio1 = (FlowTextView)newsDetialFragment.findViewById(R.id.newsDesc);
+        mtxtRatio1 = (FlowTextView) newsDetialFragment.findViewById(R.id.newsDesc);
         mtxtRatio1.setOnTouchListener(this);
         mtxtRatio1.setTextSize(mRatio + 13);
         return newsDetialFragment;
@@ -40,22 +39,20 @@ public class newsDetailFragment extends Fragment implements View.OnTouchListener
                 mBaseRatio = mRatio;
             } else {
                 int delta = (getDistance(event) - mBaseDist) / STEP;
-                int multi = (int)Math.pow(2, delta);
+                int multi = (int) Math.pow(2, delta);
                 //mRatio = Math.min(1024.0f, Math.max(0.1f, mBaseRatio * multi));
                 mRatio = Math.min(1024, Math.max(1, mBaseRatio * multi));
-                mtxtRatio1.setTextSize(mRatio+13);
+                mtxtRatio1.setTextSize(mRatio + 13);
             }
         }
         return true;
     }
 
     int getDistance(MotionEvent event) {
-        int dx = (int)(event.getX(0) - event.getX(1));
-        int dy = (int)(event.getY(0) - event.getY(1));
-        return (int)(Math.sqrt(dx * dx + dy * dy));
+        int dx = (int) (event.getX(0) - event.getX(1));
+        int dy = (int) (event.getY(0) - event.getY(1));
+        return (int) (Math.sqrt(dx * dx + dy * dy));
     }
 
 
-
-
-	}
+}
