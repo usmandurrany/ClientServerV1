@@ -5,6 +5,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -144,9 +145,9 @@ public class dunyaNewsFragment extends Fragment implements IAsyncResult, INewsDe
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Toast.makeText(getActivity(), adapter.getItem(position), Toast.LENGTH_LONG).show();
-                getdesc = new getDesc(getActivity());
-                getdesc.delegate = dunyaNewsFragment.this;
-                getdesc.execute(adapter.getItem(position));
+                Intent newsDetail = new Intent(getActivity(),newsDetailActivity.class);
+                newsDetail.putExtra("newsVal",adapter.getItem(position));
+                startActivity(newsDetail);
 
 
             }
@@ -160,7 +161,7 @@ public class dunyaNewsFragment extends Fragment implements IAsyncResult, INewsDe
 
         //Toast.makeText(getActivity(),desc, Toast.LENGTH_LONG).show();
 
-        ((MainActivity) getActivity()).detFragmentValue(image, desc);
+//        ((newsDetailActivity)).setView(image, desc);
     }
 
     public boolean isNetworkConnected() {

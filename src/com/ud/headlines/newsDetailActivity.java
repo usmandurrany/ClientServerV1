@@ -1,15 +1,20 @@
 package com.ud.headlines;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.pagesuite.flowtext.FlowTextView;
 
-public class newsDetailFragment extends Fragment implements View.OnTouchListener {
+public class newsDetailActivity extends ActionBarActivity implements View.OnTouchListener, INewsDetail {
     final static int STEP = 200;
     FlowTextView mtxtRatio1;
     //float mRatio = 1.0f;
@@ -17,16 +22,36 @@ public class newsDetailFragment extends Fragment implements View.OnTouchListener
     int mBaseDist;
     int mBaseRatio;
     //float fontsize = 13;
+    ImageView imageView;
+    FlowTextView Desc;
+    getDesc getdesc;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.newsdetailfragment);
+        imageView = (ImageView)findViewById(R.id.newsImgBig);
+        Desc = (FlowTextView) findViewById(R.id.newsDesc);
+        String newsVal = getIntent().getStringExtra("newsVal");
+        String q = getIntent().getStringExtra("news");
+        if (q == null) {
+            //Log.e(TAG, "null!");
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View newsDetialFragment = inflater.inflate(R.layout.newsdetailfragment, container, false);
+        getdesc = new getDesc(this);
+        getdesc.delegate = this;
+        getdesc.execute(newsVal);
 
-        mtxtRatio1 = (FlowTextView) newsDetialFragment.findViewById(R.id.newsDesc);
+        }
+        else {
+            // mViewPager.setCurrentItem(2);
+
+            Toast.makeText(this,q,Toast.LENGTH_LONG).show();
+        }
+
+        mtxtRatio1 = Desc;
         mtxtRatio1.setOnTouchListener(this);
         mtxtRatio1.setTextSize(mRatio + 13);
-        return newsDetialFragment;
+
     }
 
 
@@ -54,5 +79,15 @@ public class newsDetailFragment extends Fragment implements View.OnTouchListener
         return (int) (Math.sqrt(dx * dx + dy * dy));
     }
 
+    @Override
+    public void newsDet(Bitmap image, String desc) {
 
+        imageView.setImageBitmap(image);
+        Desc.setText(desc);
+        Desc.invalidate();
+    }
+    @Override
+    public void onBackPressed() {
+           finish();
+    }
 }

@@ -1,8 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:headlines="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/drawer"
             android:icon="@drawable/ic_drawer"
-            android:showAsAction="always"
+            headlines:showAsAction="always"
             android:enabled="true"
             android:checkable="true"
             android:visible="true">
