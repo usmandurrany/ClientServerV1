@@ -11,16 +11,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="com.ud.headlines" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="731743e5-5005-47bc-881b-dcc100ede0b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ud/clientserverv1/dunyaNewsFragment.java" afterPath="$PROJECT_DIR$/src/com/ud/clientserverv1/dunyaNewsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ud/clientserverv1/getDesc.java" afterPath="$PROJECT_DIR$/src/com/ud/clientserverv1/getDesc.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ud/clientserverv1/newsDetailFragment.java" afterPath="$PROJECT_DIR$/src/com/ud/clientserverv1/newsDetailFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="731743e5-5005-47bc-881b-dcc100ede0b5" name="Default" comment="" />
     <ignored path="ClientServerV1.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,9 +25,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="USE_COMPILE_SERVER" value="false" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -86,40 +78,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="104" column="56" selection-start="3680" selection-end="3680" vertical-scroll-proportion="0.0" vertical-offset="47" max-vertical-offset="4131">
+              <folding>
+                <element signature="e#4371#4398#1" expanded="true" />
+              </folding>
+            </state>
           </provider>
-          <provider editor-type-id="text-editor">
-            <state line="15" column="13" selection-start="528" selection-end="528" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="544">
+        </entry>
+      </file>
+      <file leaf-file-name="bools.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values-w720dp/bools.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="12" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getGeoNews.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getGeoNews.java">
+      <file leaf-file-name="dimens.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/values-large/dimens.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="56" selection-start="441" selection-end="475" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1564">
+            <state line="25" column="0" selection-start="1150" selection-end="1150" vertical-scroll-proportion="0.72649574" vertical-offset="0" max-vertical-offset="585">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="dunyaNewsFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/dunyaNewsFragment.java">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/dunyaNewsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="40" selection-start="1847" selection-end="1863" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2686">
-              <folding />
+            <state line="149" column="42" selection-start="5076" selection-end="5076" vertical-scroll-proportion="0.0" vertical-offset="1581" max-vertical-offset="2669">
+              <folding>
+                <element signature="e#4648#5102#0" expanded="true" />
+                <element signature="e#5091#5092#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newsDetailFragment.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/newsDetailFragment.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="32" selection-start="417" selection-end="417" vertical-scroll-proportion="-0.39534885" vertical-offset="459" max-vertical-offset="1224">
+            <state line="65" column="18" selection-start="2354" selection-end="2354" vertical-scroll-proportion="0.0" vertical-offset="656" max-vertical-offset="1241">
+              <folding>
+                <element signature="e#1177#1195#0" expanded="true" />
+                <element signature="e#1805#1823#0" expanded="true" />
+                <element signature="e#2243#2261#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newsUpadateCheck.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/newsUpadateCheck.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="126" column="61" selection-start="3413" selection-end="3413" vertical-scroll-proportion="0.0" vertical-offset="1421" max-vertical-offset="2363">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,58 +143,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newsdetailfragment.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/newsdetailfragment.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="39" selection-start="545" selection-end="557" vertical-scroll-proportion="-8.16" vertical-offset="102" max-vertical-offset="799">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getGeoDesc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getGeoDesc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="23" selection-start="1362" selection-end="1362" vertical-scroll-proportion="0.0" vertical-offset="1054" max-vertical-offset="1343">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getNews.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getNews.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="32" selection-start="684" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="2329">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="getDesc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getDesc.java">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getDesc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="23" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="2295">
+            <state line="69" column="5" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1853">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="geoNewsFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/geoNewsFragment.java">
+      <file leaf-file-name="newsDetailActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/newsDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="13" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="2958">
+            <state line="22" column="19" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1462">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newsListAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/newsListAdapter.java">
+      <file leaf-file-name="getLatestNews.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getLatestNews.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="21" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0" vertical-offset="277" max-vertical-offset="1122">
+            <state line="17" column="0" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getGeoNews.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getGeoNews.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="69" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.0" vertical-offset="707" max-vertical-offset="1292">
               <folding />
             </state>
           </provider>
@@ -192,6 +187,11 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Usman Durrani" />
+      </list>
+    </option>
     <option name="SYNC_SETTING" value="DONT" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -200,23 +200,68 @@
       <MyDateState />
     </option>
   </component>
+  <component name="GradleLocalSettings">
+    <option name="tasksExpandState">
+      <map>
+        <entry key="" value="true" />
+      </map>
+    </option>
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="Headlines" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="Headlines" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$" value="1377285182000" />
+        <entry key="C:\Users\Usman\Android Studio Projects\Headlines" value="1377287594125" />
+      </map>
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/ud/clientserverv1/newsListAdapter.java" />
-        <option value="$PROJECT_DIR$/src/com/ud/clientserverv1/getDesc.java" />
-        <option value="$PROJECT_DIR$/src/com/ud/clientserverv1/dunyaNewsFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/ud/clientserverv1/newsDetailFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/geoNewsListAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/newsListAdapter.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/AutoUpdateApk.java" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/project.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/res/layout/geonewsfragment.xml" />
+        <option value="$PROJECT_DIR$/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/dunyaNewsFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/MainActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/newsUpadateCheck.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/newsDetailActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/ud/headlines/getLatestNews.java" />
+        <option value="$PROJECT_DIR$/res/values-large/dimens.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1456" />
+    <option name="height" value="876" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -243,49 +288,38 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="clientserverv1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -295,11 +329,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -307,40 +341,63 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="values-w720dp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ClientServerV1" />
+              <option name="myItemId" value="Headlines" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-large" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="vcs.Git" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="FullScreen" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
-    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="Android Application.ClientServerV1">
+  <component name="RunManager" selected="Android Application.Headlines">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -430,12 +487,12 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="ClientServerV1" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="ClientServerV1" />
+    <configuration default="false" name="Headlines" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="Headlines" />
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -449,7 +506,7 @@
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Android Application.ClientServerV1" />
+      <item index="0" class="java.lang.String" itemvalue="Android Application.Headlines" />
     </list>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -466,6 +523,11 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -481,6 +543,7 @@
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
     <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="true">C:\Users\Usman\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="TaskManager">
@@ -489,6 +552,15 @@
       <created>1374705474163</created>
       <updated>1374705474163</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial support for Android 2.3 API 10&#10;App now uses Gradle and compiles without error.">
+      <created>1377288793060</created>
+      <updated>1377288793060</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Latest news fetch service added.&#10;News Detail View changed from Fragment to Activity.">
+      <created>1377457879327</created>
+      <updated>1377457879327</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -512,181 +584,268 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="7" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28360215" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32965687" sideWeight="0.67164177" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33064517" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17876343" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272101" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32258064" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6349024" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.67741936" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27324915" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18053855" sideWeight="0.67164177" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3283582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15972222" sideWeight="0.82123655" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17876343" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.7163978" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39919356" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Initial support for Android 2.3 API 10&#10;App now uses Gradle and compiles without error." />
+    <MESSAGE value="Latest news fetch service added.&#10;News Detail View changed from Fragment to Activity." />
+    <option name="LAST_COMMIT_MESSAGE" value="Latest news fetch service added.&#10;News Detail View changed from Fragment to Activity." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getNews.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/dunyanewsfragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="6" selection-start="618" selection-end="618" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="2329">
+        <state line="4" column="42" selection-start="233" selection-end="261" vertical-scroll-proportion="0.0981241" vertical-offset="0" max-vertical-offset="693">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/newsListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="59" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="528" selection-end="528" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/newsListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="21" selection-start="1751" selection-end="1751" vertical-scroll-proportion="0.0" vertical-offset="901" max-vertical-offset="1122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getGeoDesc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="23" selection-start="1362" selection-end="1362" vertical-scroll-proportion="0.0" vertical-offset="322" max-vertical-offset="1190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="32" selection-start="684" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="293" max-vertical-offset="1989">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/geoNewsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2346">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getDesc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="23" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.0" vertical-offset="1024" max-vertical-offset="1955">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/getGeoNews.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="56" selection-start="441" selection-end="475" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1564">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/dunyaNewsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="40" selection-start="1847" selection-end="1863" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2686">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/newsdetailfragment.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getNews.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="39" selection-start="545" selection-end="557" vertical-scroll-proportion="-8.16" vertical-offset="102" max-vertical-offset="799">
+        <state line="64" column="39" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.0" vertical-offset="1466" max-vertical-offset="1887">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ud/clientserverv1/newsDetailFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/MyBroadcastReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="32" selection-start="417" selection-end="417" vertical-scroll-proportion="-0.39534885" vertical-offset="459" max-vertical-offset="1224">
+        <state line="23" column="16" selection-start="723" selection-end="723" vertical-scroll-proportion="-0.059964728" vertical-offset="255" max-vertical-offset="1020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/GCM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="18" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.0" vertical-offset="1373" max-vertical-offset="3417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/AsyncTask.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="0" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="952">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/INewsDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="16" selection-start="100" selection-end="107" vertical-scroll-proportion="0.1183844" vertical-offset="0" max-vertical-offset="718">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="18" selection-start="2354" selection-end="2354" vertical-scroll-proportion="0.0" vertical-offset="656" max-vertical-offset="1241">
+          <folding>
+            <element signature="e#1177#1195#0" expanded="true" />
+            <element signature="e#1805#1823#0" expanded="true" />
+            <element signature="e#2243#2261#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getDesc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="5" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1853">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getGeoNews.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="69" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.0" vertical-offset="707" max-vertical-offset="1292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/newsDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="19" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/newsUpadateCheck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="61" selection-start="3413" selection-end="3413" vertical-scroll-proportion="0.0" vertical-offset="1421" max-vertical-offset="2363">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/getLatestNews.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/dunyaNewsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="149" column="42" selection-start="5076" selection-end="5076" vertical-scroll-proportion="0.0" vertical-offset="1428" max-vertical-offset="2669">
+          <folding>
+            <element signature="e#4648#5102#0" expanded="true" />
+            <element signature="e#5091#5092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ud/headlines/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="56" selection-start="3680" selection-end="3680" vertical-scroll-proportion="0.0" vertical-offset="47" max-vertical-offset="4131">
+          <folding>
+            <element signature="e#4371#4398#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-w720dp/bools.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="12" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values-large/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="1150" selection-end="1150" vertical-scroll-proportion="0.72649574" vertical-offset="0" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Detection</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Android 4.2.2 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Headlines</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>android-support-v4</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
